@@ -1,0 +1,23 @@
+{
+  "name": "rosa",
+  "version": "1.0.0",
+  "description": "A Facebook Messenger News Feed and Social Media Assistant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rei-colina-bots/rosa.git"
+  },
+  "author": "Rei Colina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rei-colina-bots/rosa/issues"
+  },
+  "homepage": "https://github.com/rei-colina-bots/rosa#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
