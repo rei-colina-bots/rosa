@@ -92,14 +92,27 @@ app.get('/webhook', (req, res) => {
 
 // Endpoint to set up the bot's main configuration
 app.get('/setup', (req, res) => {
-    setupGetStartedButton(res);
+    botSetup(res);
 });
 
-function setupGetStartedButton(res){
+function botSetup(res){
     let request_body = {
         "get_started": {
             "payload": "get started"
-        }
+        },
+        "persistent_menu":[
+            {
+              "locale":"default",
+              "composer_input_disabled": true,
+              "call_to_actions":[
+                {
+                  "title":"Tech News",
+                  "type":"postback",
+                  "payload": "tech-news"
+                }
+              ]
+            }
+        ]
     }
     callSendAPI(request_body, 'messenger_profile');
     res.status(200).send('SETUP_COMPLETED');
