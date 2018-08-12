@@ -93,6 +93,8 @@ app.get('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
+    // Start "typing"
+    sendAction(sender_psid, 'typing_on');
     
     sendAction(sender_psid, 'mark_seen');
 
@@ -115,9 +117,6 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function sendMessage(sender_psid, message) {
-    // Start "typing"
-    sendAction(sender_psid, 'typing_on');
-
     // Construct the message body
     let request_body = {
         "recipient": {
