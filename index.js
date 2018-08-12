@@ -93,6 +93,8 @@ app.get('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
+    
+    sendAction(sender_psid, 'mark_seen');
 
     // Check if the message contains text
     if (received_message.text) {    
@@ -104,7 +106,7 @@ function handleMessage(sender_psid, received_message) {
     }  
     
     // Sends the response message
-    callSendAPI(sender_psid, response);
+    sendMessage(sender_psid, response);
 }
 
 // Handles messaging_postbacks events
@@ -112,15 +114,34 @@ function handlePostback(sender_psid, received_postback) {
 
 }
 
-// Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+function sendMessage(sender_psid, message) {
+    // Start "typing"
+    sendAction(sender_psid, 'typing_on');
+
     // Construct the message body
     let request_body = {
-    "recipient": {
-        "id": sender_psid
-    },
-    "message": response
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": message
     }
+    sendAction(sender_psid, 'typing_off');
+    callSendAPI(sender_psid, request_body);
+}
+
+function sendAction(sender_psid, action) {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": action
+    }
+    callSendAPI(sender_psid, request_body);
+}
+
+// Sends response messages via the Send API
+function callSendAPI(request_body) {
     // Send the HTTP request to the Messenger Platform
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
