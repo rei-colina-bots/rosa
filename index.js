@@ -144,9 +144,9 @@ function botSetup(res){
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
-    sendAction(sender_psid, 'typing_on');
     
     sendAction(sender_psid, 'mark_seen');
+    sendAction(sender_psid, 'typing_on');
 
     // Check if the message contains text
     if (received_message.text) {    
@@ -164,6 +164,8 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
+
+    sendAction(sender_psid, 'mark_seen');
     sendAction(sender_psid, 'typing_on');
   
     // Get the payload for the postback
