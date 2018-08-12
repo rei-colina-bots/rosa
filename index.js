@@ -90,6 +90,21 @@ app.get('/webhook', (req, res) => {
     }
   });
 
+// Endpoint to set up the bot's main configuration
+app.get('/setup', (req, res) => {
+    setupGetStartedButton(res);
+});
+
+function setupGetStartedButton(res){
+    let request_body = {
+        "get_started": {
+            "payload": "get started"
+        }
+    }
+    callSendAPI(request_body, 'messenger_profile');
+    res.status(200).send('SETUP_COMPLETED');
+}        
+
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
@@ -113,7 +128,18 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
+    let response;
+  
+    // Get the payload for the postback
+    let payload = received_postback.payload;
+  
+    // Set the response based on the postback payload
+    if (payload === 'get started') {
+      response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
+    }
 
+    // Send the message to acknowledge the postback
+    sendMessage(sender_psid, response);
 }
 
 function sendMessage(sender_psid, message) {
@@ -140,10 +166,10 @@ function sendAction(sender_psid, action) {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(request_body) {
+function callSendAPI(request_body, endpoint) {
     // Send the HTTP request to the Messenger Platform
     request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "uri": "https://graph.facebook.com/v2.6/me/" + (endpoint || "messages"),
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
