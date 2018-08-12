@@ -106,20 +106,30 @@ function botSetup(res){
               "composer_input_disabled": true,
               "call_to_actions":[
                 {
-                  "title":"My Account",
+                  "title":"Menu",
                   "type":"nested",
                   "call_to_actions":[
                     {
-                      "title":"Pay Bill",
-                      "type":"postback",
-                      "payload":"PAYBILL_PAYLOAD"
+                        "title":"News",
+                        "type":"nested",
+                        "call_to_actions": [
+                            {
+                                "title":"Tech",
+                                "type":"postback",
+                                "payload":"tech-news"
+                            }
+                        ]
                     },
                     {
-                      "type":"web_url",
-                      "title":"Latest News",
-                      "url":"https://www.messenger.com/",
-                      "webview_height_ratio":"full"
-                    }
+                        "title":"Articles",
+                        "type":"nested",
+                        "call_to_actions": [
+                          {
+                              "title":"Coming Soon...",
+                              "type":"postback"
+                          }
+                        ]
+                      }
                   ]
                 }
               ]
