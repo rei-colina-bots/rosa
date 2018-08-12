@@ -1,5 +1,9 @@
 'use strict';
 
+// To test the webhook:
+// curl -X GET "localhost:1337/webhook?hub.verify_token=<YOUR_VERIFY_TOKEN>&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+// curl -H "Content-Type: application/json" -X POST "localhost:1337/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
+
 // Imports dependencies and set up http server
 const
   express = require('express'),
@@ -47,7 +51,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>"
+    let VERIFY_TOKEN =  process.env.VERIFY_TOKEN || "<YOUR_VERIFY_TOKEN>"
       
     // Parse the query params
     let mode = req.query['hub.mode'];
