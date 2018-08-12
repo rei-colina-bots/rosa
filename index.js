@@ -108,7 +108,6 @@ function setupGetStartedButton(res){
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
-    // Start "typing"
     sendAction(sender_psid, 'typing_on');
     
     sendAction(sender_psid, 'mark_seen');
@@ -129,6 +128,7 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
+    sendAction(sender_psid, 'typing_on');
   
     // Get the payload for the postback
     let payload = received_postback.payload;
