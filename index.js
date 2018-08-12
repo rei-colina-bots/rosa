@@ -126,7 +126,8 @@ function botSetup(res){
                         "call_to_actions": [
                           {
                               "title":"Coming Soon...",
-                              "type":"postback"
+                              "type":"postback",
+                              "payload": "NOTHING"
                           }
                         ]
                       }
