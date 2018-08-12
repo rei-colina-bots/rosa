@@ -94,7 +94,7 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
     let response;
     
-    sendAction(sender_psid, 'mark_seen');
+    // sendAction(sender_psid, 'mark_seen');
 
     // Check if the message contains text
     if (received_message.text) {    
@@ -116,7 +116,7 @@ function handlePostback(sender_psid, received_postback) {
 
 function sendMessage(sender_psid, message) {
     // Start "typing"
-    sendAction(sender_psid, 'typing_on');
+    // sendAction(sender_psid, 'typing_on');
 
     // Construct the message body
     let request_body = {
@@ -125,7 +125,7 @@ function sendMessage(sender_psid, message) {
         },
         "message": message
     }
-    sendAction(sender_psid, 'typing_off');
+    // sendAction(sender_psid, 'typing_off');
     callSendAPI(sender_psid, request_body);
 }
 
@@ -150,7 +150,8 @@ function callSendAPI(request_body) {
         "json": request_body
     }, (err, res, body) => {
         if (!err) {
-            console.log('message sent!')
+            console.log('message sent!');
+            console.log(res);
         } else {
             console.error("Unable to send message:" + err);
         }
