@@ -106,13 +106,25 @@ function botSetup(res){
               "composer_input_disabled": true,
               "call_to_actions":[
                 {
-                  "title":"Tech News",
-                  "type":"postback",
-                  "payload": "tech-news"
+                  "title":"My Account",
+                  "type":"nested",
+                  "call_to_actions":[
+                    {
+                      "title":"Pay Bill",
+                      "type":"postback",
+                      "payload":"PAYBILL_PAYLOAD"
+                    },
+                    {
+                      "type":"web_url",
+                      "title":"Latest News",
+                      "url":"https://www.messenger.com/",
+                      "webview_height_ratio":"full"
+                    }
+                  ]
                 }
               ]
             }
-        ]
+          ]
     }
     callSendAPI(request_body, 'messenger_profile');
     res.status(200).send('SETUP_COMPLETED');
