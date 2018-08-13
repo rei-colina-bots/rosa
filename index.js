@@ -9,6 +9,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
+  hackerNews = require('hackernews-api'),
   app = express().use(bodyParser.json()); // creates express http server
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -160,6 +161,19 @@ function buildCard(title, image_url, subtitle, url) {
     }
 }
 
+function getTechArticles() {
+    let articles = [];
+    let ids = hackerNews.getTopStories();
+    ids.forEach(function(id) {
+        var article = hackerNews.getItem(id);
+        articles.push({
+            'title': article.title,
+            'url': artitle.url
+        });
+    });
+    return articles.slice(0, 2);
+}
+
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
@@ -194,13 +208,16 @@ function handlePostback(sender_psid, received_postback) {
     if (payload === 'get started') {
       response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
     } else if((payload === 'topic-tech')) {
+        var articles = getTechArticles
         response = {
             "attachment":{
               "type":"template",
               "payload":{
                 "template_type":"generic",
                 "elements":[
-                   buildCard('Article Title', 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg', 'Article Subtitle', 'www.google.com')
+                   buildCard(articles[0].title, '', '', articles[0].url),
+                   buildCard(articles[1].title, '', '', articles[1].url),
+                   buildCard(articles[2].title, '', '', articles[2].url)
                 ]
               }
             }
