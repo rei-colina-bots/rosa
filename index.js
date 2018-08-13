@@ -110,27 +110,12 @@ function botSetup(res){
                   "type":"nested",
                   "call_to_actions":[
                     {
-                        "title":"News",
+                        "title":"Topics",
                         "type":"nested",
                         "call_to_actions": [
-                            {
-                                "title":"Tech",
-                                "type":"postback",
-                                "payload":"tech-news"
-                            }
+                            buildPostbackButton('Technology', 'topic-tech')
                         ]
-                    },
-                    {
-                        "title":"Articles",
-                        "type":"nested",
-                        "call_to_actions": [
-                          {
-                              "title":"Coming Soon...",
-                              "type":"postback",
-                              "payload": "NOTHING"
-                          }
-                        ]
-                      }
+                    }
                   ]
                 }
               ]
@@ -139,7 +124,41 @@ function botSetup(res){
     }
     callSendAPI(request_body, 'messenger_profile');
     res.status(200).send('SETUP_COMPLETED');
-}        
+}
+
+function buildPostbackButton(title, payload) {
+    return {
+        "type": "postback",
+        "payload": payload,
+        "title": title
+    };
+}
+
+function buildWebURLButton(title, url) {
+    return {
+        "type": "web_url",
+        "url": url,
+        "title": title
+    };
+}
+
+function buildCard(title, image_url, subtitle, url) {
+    return {
+        "title": title,
+        "image_url": image_url,
+        "subtitle": subtitle,
+        "default_action": {
+          "type": "web_url",
+          "url": url,
+          "webview_height_ratio": "tall",
+        },
+        "buttons":[
+            buildWebURLButton('Share to Facebook', 'www.facebook.com'),
+            buildWebURLButton('Share to Twitter', 'www.twitter.com'),
+            buildWebURLButton('Share to LinkedIn', 'www.linkedin.com'),
+        ]      
+    }
+}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -174,6 +193,18 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     if (payload === 'get started') {
       response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
+    } else if((payload === 'topic-tech')) {
+        response = {
+            "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type":"generic",
+                "elements":[
+                   buildCard('Article Title', 'https://www.articlesplanet.info/wp-content/uploads/2018/05/Tech-sector.jpg', 'Article Subtitle', 'www.google.com')
+                ]
+              }
+            }
+        }
     }
 
     // Send the message to acknowledge the postback
