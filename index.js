@@ -165,7 +165,7 @@ function getTechArticles() {
     let articles = [];
     let ids = hackerNews.getTopStories();
     let i = 0
-    for (i = 0; i < 4; i++) { 
+    for (i = 0; i < 3; i++) { 
         var article = hackerNews.getItem(ids[i]);
         articles.push({
             'title': article.title,
@@ -198,13 +198,14 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
+
     sendAction(sender_psid, 'mark_seen');
-    sendAction(sender_psid, 'typing_on');
   
     // Get the payload for the postback
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
+    sendAction(sender_psid, 'typing_on');
     if (payload === 'get started') {
       response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
     } else if((payload === 'topic-tech')) {
@@ -217,9 +218,7 @@ function handlePostback(sender_psid, received_postback) {
                 "elements":[
                    buildCard(articles[0].title, '', '', articles[0].url),
                    buildCard(articles[1].title, '', '', articles[1].url),
-                   buildCard(articles[2].title, '', '', articles[2].url),
-                   buildCard(articles[3].title, '', '', articles[3].url),
-                   buildCard(articles[4].title, '', '', articles[4].url)
+                   buildCard(articles[2].title, '', '', articles[2].url)
                 ]
               }
             }
