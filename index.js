@@ -164,14 +164,15 @@ function buildCard(title, image_url, subtitle, url) {
 function getTechArticles() {
     let articles = [];
     let ids = hackerNews.getTopStories();
-    ids.forEach(function(id) {
-        var article = hackerNews.getItem(id);
+    let i = 0
+    for (i = 0; i < 3; i++) { 
+        var article = hackerNews.getItem(ids[i]);
         articles.push({
             'title': article.title,
             'url': article.url
         });
-    });
-    return articles.slice(0, 2);
+    }
+    return articles;
 }
 
 // Handles messages events
