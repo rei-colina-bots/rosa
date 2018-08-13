@@ -208,7 +208,7 @@ function handlePostback(sender_psid, received_postback) {
     if (payload === 'get started') {
       response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
     } else if((payload === 'topic-tech')) {
-        var articles = getTechArticles
+        var articles = getTechArticles();
         response = {
             "attachment":{
               "type":"template",
