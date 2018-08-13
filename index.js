@@ -165,7 +165,7 @@ function getTechArticles() {
     let articles = [];
     let ids = hackerNews.getTopStories();
     let i = 0
-    for (i = 0; i < 3; i++) { 
+    for (i = 0; i < 4; i++) { 
         var article = hackerNews.getItem(ids[i]);
         articles.push({
             'title': article.title,
