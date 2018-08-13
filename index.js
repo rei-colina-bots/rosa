@@ -198,7 +198,6 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
-
     sendAction(sender_psid, 'mark_seen');
     sendAction(sender_psid, 'typing_on');
   
@@ -218,7 +217,9 @@ function handlePostback(sender_psid, received_postback) {
                 "elements":[
                    buildCard(articles[0].title, '', '', articles[0].url),
                    buildCard(articles[1].title, '', '', articles[1].url),
-                   buildCard(articles[2].title, '', '', articles[2].url)
+                   buildCard(articles[2].title, '', '', articles[2].url),
+                   buildCard(articles[3].title, '', '', articles[3].url),
+                   buildCard(articles[4].title, '', '', articles[4].url)
                 ]
               }
             }
