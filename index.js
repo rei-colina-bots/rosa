@@ -165,7 +165,7 @@ function buildShareLink(network, title, url) {
     if (network === 'fb') {
         return 'https://www.facebook.com/sharer/sharer.php?u=' + url;
     } else if (network === 'tw') {
-        return 'https://twitter.com/home?status=' + title + '%20' + 'url';
+        return 'https://twitter.com/home?status=' + title + '%20' + url;
     } else if (network === 'li') {
         return 'https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + title;
     } else {
