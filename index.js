@@ -107,14 +107,14 @@ function botSetup(res){
               "composer_input_disabled": true,
               "call_to_actions":[
                 {
-                  "title":"Menu",
+                  "title":"💬 Menu",
                   "type":"nested",
                   "call_to_actions":[
                     {
-                        "title":"Topics",
+                        "title":"🗂 Topics",
                         "type":"nested",
                         "call_to_actions": [
-                            buildPostbackButton('Technology', 'topic-tech')
+                            buildPostbackButton('🛰 Technology', 'topic-tech')
                         ]
                     }
                   ]
@@ -154,10 +154,22 @@ function buildCard(title, image_url, subtitle, url) {
           "webview_height_ratio": "tall",
         },
         "buttons":[
-            buildWebURLButton('Share to Facebook', 'www.facebook.com'),
-            buildWebURLButton('Share to Twitter', 'www.twitter.com'),
-            buildWebURLButton('Share to LinkedIn', 'www.linkedin.com'),
+            buildWebURLButton('Share on Facebook', buildShareLink('fb', title, url)),
+            buildWebURLButton('Share on Twitter', buildShareLink('tw', title, url)),
+            buildWebURLButton('Share on LinkedIn', buildShareLink('li', title, url)),
         ]      
+    }
+}
+
+function buildShareLink(network, title, url) {
+    if (network === 'fb') {
+        return 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+    } else if (network === 'tw') {
+        return 'https://twitter.com/home?status=' + title + '%20' + 'url';
+    } else if (network === 'li') {
+        return 'https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + title;
+    } else {
+        return '';
     }
 }
 
@@ -207,7 +219,7 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     sendAction(sender_psid, 'typing_on');
     if (payload === 'get started') {
-      response = { "text": "Down below 👇🏼 there is a menu where you can choose to get the latest news from topics that I currently support" }
+      response = { "text": "There is a menu down below 👇🏼 where you can ask to get the latest articles from topics that I currently support" }
     } else if((payload === 'topic-tech')) {
         var articles = getTechArticles();
         response = {
