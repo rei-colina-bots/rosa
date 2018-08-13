@@ -168,7 +168,7 @@ function getTechArticles() {
         var article = hackerNews.getItem(id);
         articles.push({
             'title': article.title,
-            'url': artitle.url
+            'url': article.url
         });
     });
     return articles.slice(0, 2);
