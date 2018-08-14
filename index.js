@@ -134,5 +134,5 @@ function handlePostback(sender_psid, received_postback) {
     // Also, delay a bit so the TYPING_OFF has enough time to kick in.
     setTimeout(() => {
       api.sendMessage(sender_psid, response);
-    }, 300); 
+    }, 2000); 
 }
