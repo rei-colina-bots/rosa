@@ -10,7 +10,7 @@ const
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
   text = require("./constants/text.js"),
-  events = require("./constants/events.js");
+  events = require("./constants/events.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
