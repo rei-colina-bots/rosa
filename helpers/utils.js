@@ -6,16 +6,18 @@
  * Utility objects and methods.
  */
 
+const config = require("../constants/config.js");
+
 /*
  * Generates a social media share link
  */
 const getShareLink = (network, title, url) => {
     if (network === 'fb') {
-        return 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+        return config.FB_SHARE_URL + url;
     } else if (network === 'tw') {
-        return 'https://twitter.com/intent/tweet?text=' + title + '%20' + url + '&source=webclient';
+        return config.TW_SHARE_URL + title + '%20' + url + '&source=webclient';
     } else if (network === 'li') {
-        return 'https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + title;
+        return config.LI_SHARE_URL + url + '&title=' + title;
     } else {
         return '';
     }

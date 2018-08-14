@@ -1,9 +1,5 @@
 'use strict';
 
-// To test the webhook:
-// curl -X GET "localhost:1337/webhook?hub.verify_token=<YOUR_VERIFY_TOKEN>&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
-// curl -H "Content-Type: application/json" -X POST "localhost:1337/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
-
 // Imports dependencies and set up http server
 const
   express = require('express'),
@@ -13,20 +9,20 @@ const
   utils = require('./helpers/utils.js'),
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
+  text = require("./constants/text.js"),
+  events = require("./constants/events.js");
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
 
 // Creates the endpoint for our webhook.
 // It accepts POST requests, checks the request is a webhook event,
 // then parses the message. This endpoint is where the Messenger Platform
 // will send all webhook events.
 app.post('/webhook', (req, res) => {  
- 
     let body = req.body;
-  
+
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
   
@@ -45,7 +41,7 @@ app.post('/webhook', (req, res) => {
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
         if (webhook_event.message) {
-            handleMessage(sender_psid, webhook_event.message);        
+            handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
         }
@@ -68,7 +64,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    const VERIFY_TOKEN = process.env.VERIFY_TOKEN || "<YOUR_VERIFY_TOKEN>";
+    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
       
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -87,7 +83,7 @@ app.get('/webhook', (req, res) => {
       
       } else {
         // Responds with '403 Forbidden' if verify tokens do not match
-        res.sendStatus(403);      
+        res.sendStatus(403);
       }
     }
   });
@@ -101,13 +97,13 @@ app.get('/setup', (req, res) => {
 function handleMessage(sender_psid, received_message) {
     let response;
     
-    api.sendAction(sender_psid, 'mark_seen');
-    api.sendAction(sender_psid, 'typing_on');
+    api.sendAction(sender_psid, events.MARK_SEEN);
+    api.sendAction(sender_psid, events.TYPING_ON);
 
     // Check if the message contains text
-    if (received_message.text) {    
+    if (received_message.text) {
       // Create the payload for a basic text message
-      response = messages.text('You sent the message: "${received_message.text}".')
+      response = messages.text(text.ECHO);
     }  
     
     // Sends the response message
@@ -118,34 +114,28 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
     let response;
 
-    api.sendAction(sender_psid, 'mark_seen');
+    api.sendAction(sender_psid, events.MARK_SEEN);
   
     // Get the payload for the postback
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
-    api.sendAction(sender_psid, 'typing_on');
-    if (payload === 'get started') {
-      response = messages.text('There is a menu down below 👇🏼 where you can ask to get the latest articles from topics that I currently support');
-    } else if((payload === 'topic-tech')) {
+    api.sendAction(sender_psid, events.TYPING_ON);
+    if (payload === events.GET_STARTED) {
+      response = messages.text(text.GET_STARTED);
+    } else if((payload === events.TOPIC_TECH)) {
         var i;
         var techArticles = articles.getTech();
         var cards = [];
         for (i = 0; i < 3; i++) {
             var buttons = [
-                messages.webURLButton('Share on Facebook', utils.getShareLink('fb', techArticles[i].title, techArticles[i].url)),
-                messages.webURLButton('Share on Twitter', utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
-                messages.webURLButton('Share on LinkedIn', utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
+                messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', techArticles[i].title, techArticles[i].url)),
+                messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
+                messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
             ];
-            console.log("BUTTONS!!!!!!");
-            console.log(buttons);
             cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
         }
-        console.log("CARDS!!!!!!");
-        console.log(cards);
         response = messages.carousel(cards);
-        console.log("RESPONSE!!!!!");
-        console.log(response);
     }
 
     // Send the message to acknowledge the postback

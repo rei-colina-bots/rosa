@@ -6,6 +6,8 @@
  * Objects and methods to make calls to the Bot API.
  */
 
+const events = require("../constants/events.js");
+const config = require("../constants/config.js");
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -20,7 +22,7 @@ const sendMessage = (sender_psid, message) => {
         },
         message: message
     }
-    sendAction(sender_psid, 'typing_off');
+    sendAction(sender_psid, events.TYPING_OFF);
     callSendAPI(request_body);
 };
 
@@ -44,7 +46,7 @@ const sendAction = (sender_psid, action) => {
 const callSendAPI = (request_body, endpoint) => {
     // Send the HTTP request to the Messenger Platform
     request({
-        uri: 'https://graph.facebook.com/v2.6/me/' + (endpoint || 'messages'),
+        uri: config.FB_API_URL + (endpoint || 'messages'),
         qs: { 'access_token': PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: request_body
@@ -58,10 +60,8 @@ const callSendAPI = (request_body, endpoint) => {
     }); 
 };
 
-
 module.exports = {
     sendMessage,
     sendAction,
     callSendAPI
 }
-

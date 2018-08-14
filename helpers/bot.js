@@ -6,6 +6,8 @@
  * Utility objects and methods specific to bot setup.
  */
 
+const text = require("../constants/text.js");
+const events = require("../constants/events.js");
 const messages = require('./messages.js');
 const api = require('./api.js');
 
@@ -15,7 +17,7 @@ const api = require('./api.js');
 const setup = (res) => {
     let request_body = {
         get_started: {
-            payload: 'get started'
+            payload: events.GET_STARTED
         },
         persistent_menu:[
             {
@@ -23,14 +25,15 @@ const setup = (res) => {
               composer_input_disabled: true,
               call_to_actions:[
                 {
-                  title: '💬 Menu',
+                  title: text.MENU,
                   type: 'nested',
                   call_to_actions:[
                     {
-                        title: '🗂 Topics',
+                        title: text.MENU_TOPICS,
                         type: 'nested',
                         call_to_actions: [
-                            messages.postbackButton('🛰 Technology', 'topic-tech')
+                            messages.postbackButton(text.MENU_TECH,
+                                events.TOPIC_TECH)
                         ]
                     }
                   ]
@@ -43,8 +46,6 @@ const setup = (res) => {
     res.status(200).send('SETUP_COMPLETED');
 };
 
-
 module.exports = {
     setup
 }
-
