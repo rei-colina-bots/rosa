@@ -1,3 +1,5 @@
+"use strict";
+
 /*
  * MESSAGES
  *
@@ -16,8 +18,7 @@ const buildPostbackButton = function(title, payload) {
     };
 };
 
-
-export default {
+module.exports = {
     buildPostbackButton
-};
+}
 
