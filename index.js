@@ -131,8 +131,5 @@ function handlePostback(sender_psid, received_postback) {
     api.sendAction(sender_psid, events.TYPING_OFF);
 
     // Send the message to acknowledge the postback
-    // Also, delay a bit so the TYPING_OFF has enough time to kick in.
-    setTimeout(() => {
-      api.sendMessage(sender_psid, response);
-    }, 2000); 
+    api.sendMessage(sender_psid, response);
 }
