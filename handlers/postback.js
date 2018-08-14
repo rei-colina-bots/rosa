@@ -6,10 +6,10 @@
  * Methods that handle postback events.
  */
 
-const messages = require("../helpers/messages.js")
-const text = require("../constants/text.js")
-const utils = require("../helpers/utils.js")
-const articles = require("../helpers/articles.js"),
+const messages = require("../helpers/messages.js");
+const text = require("../constants/text.js");
+const utils = require("../helpers/utils.js");
+const articles = require("../helpers/articles.js");
 
 /*
  * Returns a response to the GET_STARTED event
