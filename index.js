@@ -11,6 +11,7 @@ const
   bot = require("./helpers/bot.js"),
   text = require("./constants/text.js"),
   events = require("./constants/events.js"),
+  postback = require("./handlers/postback.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
@@ -122,20 +123,9 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     api.sendAction(sender_psid, events.TYPING_ON);
     if (payload === events.GET_STARTED) {
-      response = messages.text(text.GET_STARTED);
+      response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
-        var i;
-        var techArticles = articles.getTech();
-        var cards = [];
-        for (i = 0; i < 3; i++) {
-            var buttons = [
-                messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', techArticles[i].title, techArticles[i].url)),
-                messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
-                messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
-            ];
-            cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
-        }
-        response = messages.carousel(cards);
+        response = postback.handleTechTopic();
     }
 
     // Send the message to acknowledge the postback
