@@ -9,8 +9,10 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
-  hackerNews = require('hackernews-api'),
   messages = require("./helpers/messages.js"),
+  articles = require("./helpers/articles.js"),
+  utils = require('./helpers/utils.js');
+  bot = require("./helpers/bot.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -94,91 +96,8 @@ app.get('/webhook', (req, res) => {
 
 // Endpoint to set up the bot's main configuration
 app.get('/setup', (req, res) => {
-    botSetup(res);
+    bot.setup(res);
 });
-
-function botSetup(res){
-    let request_body = {
-        "get_started": {
-            "payload": "get started"
-        },
-        "persistent_menu":[
-            {
-              "locale":"default",
-              "composer_input_disabled": true,
-              "call_to_actions":[
-                {
-                  "title":"💬 Menu",
-                  "type":"nested",
-                  "call_to_actions":[
-                    {
-                        "title":"🗂 Topics",
-                        "type":"nested",
-                        "call_to_actions": [
-                            messages.buildPostbackButton('🛰 Technology', 'topic-tech')
-                        ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-    }
-    callSendAPI(request_body, 'messenger_profile');
-    res.status(200).send('SETUP_COMPLETED');
-}
-
-function buildWebURLButton(title, url) {
-    return {
-        "type": "web_url",
-        "url": url,
-        "title": title
-    };
-}
-
-function buildCard(title, image_url, subtitle, url) {
-    return {
-        "title": title,
-        "image_url": image_url,
-        "subtitle": subtitle,
-        "default_action": {
-          "type": "web_url",
-          "url": url,
-          "webview_height_ratio": "tall",
-        },
-        "buttons":[
-            buildWebURLButton('Share on Facebook', buildShareLink('fb', title, url)),
-            buildWebURLButton('Share on Twitter', buildShareLink('tw', title, url)),
-            buildWebURLButton('Share on LinkedIn', buildShareLink('li', title, url)),
-        ]      
-    }
-}
-
-function buildShareLink(network, title, url) {
-    if (network === 'fb') {
-        return 'https://www.facebook.com/sharer/sharer.php?u=' + url;
-    } else if (network === 'tw') {
-        return 'https://twitter.com/intent/tweet?text=' + title + '%20' + url + '&source=webclient';
-    } else if (network === 'li') {
-        return 'https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + title;
-    } else {
-        return '';
-    }
-}
-
-function getTechArticles() {
-    let articles = [];
-    let ids = hackerNews.getTopStories();
-    let i = 0
-    for (i = 0; i < 3; i++) { 
-        var article = hackerNews.getItem(ids[i]);
-        articles.push({
-            'title': article.title,
-            'url': article.url
-        });
-    }
-    return articles;
-}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -189,11 +108,8 @@ function handleMessage(sender_psid, received_message) {
 
     // Check if the message contains text
     if (received_message.text) {    
-  
       // Create the payload for a basic text message
-      response = {
-        "text": `You sent the message: "${received_message.text}".`
-      }
+      response = messages.text('You sent the message: "${received_message.text}".')
     }  
     
     // Sends the response message
@@ -212,22 +128,20 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     sendAction(sender_psid, 'typing_on');
     if (payload === 'get started') {
-      response = { "text": "There is a menu down below 👇🏼 where you can ask to get the latest articles from topics that I currently support" }
+      response = messages.text('There is a menu down below 👇🏼 where you can ask to get the latest articles from topics that I currently support');
     } else if((payload === 'topic-tech')) {
-        var articles = getTechArticles();
-        response = {
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements":[
-                   buildCard(articles[0].title, '', '', articles[0].url),
-                   buildCard(articles[1].title, '', '', articles[1].url),
-                   buildCard(articles[2].title, '', '', articles[2].url)
-                ]
-              }
-            }
+        var i;
+        var techArticles = articles.getTech();
+        var cards = [];
+        for (i = 0; i < 3; i++) {
+            var buttons = [
+                messages.webURLButton('Share on Facebook', utils.getShareLink('fb', techArticles[i].title, techArticles[i].url)),
+                messages.webURLButton('Share on Twitter', utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
+                messages.webURLButton('Share on LinkedIn', utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
+            ];
+            cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
         }
+        response = messages.carousel(cards);
     }
 
     // Send the message to acknowledge the postback
