@@ -11,7 +11,7 @@ const
   request = require('request'),
   messages = require("./helpers/messages.js"),
   articles = require("./helpers/articles.js"),
-  utils = require('./helpers/utils.js');
+  utils = require('./helpers/utils.js'),
   bot = require("./helpers/bot.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
