@@ -42,7 +42,7 @@ const card = (title, image_url, subtitle, url, buttons) => {
             url: url,
             webview_height_ratio: 'tall',
         },
-        buttons:[buttons]      
+        buttons:[buttons]
     }
 };
 
