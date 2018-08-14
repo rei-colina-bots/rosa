@@ -10,6 +10,7 @@ const
   bodyParser = require('body-parser'),
   request = require('request'),
   hackerNews = require('hackernews-api'),
+  messages = require("./helpers/messages.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -114,7 +115,7 @@ function botSetup(res){
                         "title":"🗂 Topics",
                         "type":"nested",
                         "call_to_actions": [
-                            buildPostbackButton('🛰 Technology', 'topic-tech')
+                            messages.buildPostbackButton('🛰 Technology', 'topic-tech')
                         ]
                     }
                   ]
@@ -125,14 +126,6 @@ function botSetup(res){
     }
     callSendAPI(request_body, 'messenger_profile');
     res.status(200).send('SETUP_COMPLETED');
-}
-
-function buildPostbackButton(title, payload) {
-    return {
-        "type": "postback",
-        "payload": payload,
-        "title": title
-    };
 }
 
 function buildWebURLButton(title, url) {
