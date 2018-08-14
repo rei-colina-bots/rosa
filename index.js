@@ -139,11 +139,8 @@ function handlePostback(sender_psid, received_postback) {
             ];
             cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
         }
-        console.log('CARDS!!!!!');
-        console.log(cards);
+
         response = messages.carousel(cards);
-        console.log('RESPONSE!!!!!');
-        console.log(response);
     }
 
     // Send the message to acknowledge the postback
