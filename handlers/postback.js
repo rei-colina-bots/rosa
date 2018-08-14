@@ -26,14 +26,14 @@ const handleTechTopic = () => {
     let techArticles = articles.getTech();
     let cards = [];
     let buttons = [];
-    for (i = 0; i < 3; i++) {
+    techArticles.forEach((article) => {
         buttons = [
-            messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', techArticles[i].title, techArticles[i].url)),
-            messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
-            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
+            messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
+            messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
+            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
         ];
-        cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
-    }
+        cards.push(messages.card(article.title, '', '', article.url, buttons));
+    });
     return messages.carousel(cards);
 };
 

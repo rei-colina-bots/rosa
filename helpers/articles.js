@@ -16,7 +16,7 @@ const getTech = () => {
     let articles = [];
     let ids = hackerNews.getTopStories();
     let i = 0
-    while (articles.length < 3) {
+    while (articles.length < 5) {
         var article = hackerNews.getItem(ids[i]);
         if (article.title && article.url) {
             articles.push({
