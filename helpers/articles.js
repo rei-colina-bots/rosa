@@ -16,12 +16,15 @@ const getTech = () => {
     let articles = [];
     let ids = hackerNews.getTopStories();
     let i = 0
-    for (i = 0; i < 3; i++) { 
+    while (articles.length < 3) {
         var article = hackerNews.getItem(ids[i]);
-        articles.push({
-            title: article.title,
-            url: article.url
-        });
+        if (article.title && article.url) {
+            articles.push({
+                title: article.title,
+                url: article.url
+            });
+        }
+        i = i + 1;
     }
     return articles;
 };
