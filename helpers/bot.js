@@ -6,7 +6,8 @@
  * Utility objects and methods specific to bot setup.
  */
 
-const messages = require('./messages');
+const messages = require('./messages.js');
+const api = require('./api.js');
 
 /*
  * Sets up the bot
@@ -38,7 +39,7 @@ const setup = (res) => {
             }
           ]
     };
-    callSendAPI(request_body, 'messenger_profile');
+    api.callSendAPI(request_body, 'messenger_profile');
     res.status(200).send('SETUP_COMPLETED');
 };
 

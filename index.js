@@ -8,14 +8,12 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  request = require('request'),
   messages = require("./helpers/messages.js"),
   articles = require("./helpers/articles.js"),
   utils = require('./helpers/utils.js'),
+  api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
   app = express().use(bodyParser.json()); // creates express http server
-
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -103,8 +101,8 @@ app.get('/setup', (req, res) => {
 function handleMessage(sender_psid, received_message) {
     let response;
     
-    sendAction(sender_psid, 'mark_seen');
-    sendAction(sender_psid, 'typing_on');
+    api.sendAction(sender_psid, 'mark_seen');
+    api.sendAction(sender_psid, 'typing_on');
 
     // Check if the message contains text
     if (received_message.text) {    
@@ -113,20 +111,20 @@ function handleMessage(sender_psid, received_message) {
     }  
     
     // Sends the response message
-    sendMessage(sender_psid, response);
+    api.sendMessage(sender_psid, response);
 }
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
     let response;
 
-    sendAction(sender_psid, 'mark_seen');
+    api.sendAction(sender_psid, 'mark_seen');
   
     // Get the payload for the postback
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
-    sendAction(sender_psid, 'typing_on');
+    api.sendAction(sender_psid, 'typing_on');
     if (payload === 'get started') {
       response = messages.text('There is a menu down below 👇🏼 where you can ask to get the latest articles from topics that I currently support');
     } else if((payload === 'topic-tech')) {
@@ -145,46 +143,5 @@ function handlePostback(sender_psid, received_postback) {
     }
 
     // Send the message to acknowledge the postback
-    sendMessage(sender_psid, response);
-}
-
-function sendMessage(sender_psid, message) {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": message
-    }
-    sendAction(sender_psid, 'typing_off');
-    callSendAPI(request_body);
-}
-
-function sendAction(sender_psid, action) {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "sender_action": action
-    }
-    callSendAPI(request_body);
-}
-
-// Sends response messages via the Send API
-function callSendAPI(request_body, endpoint) {
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v2.6/me/" + (endpoint || "messages"),
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!');
-            console.log(body);
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    }); 
+    api.sendMessage(sender_psid, response);
 }
