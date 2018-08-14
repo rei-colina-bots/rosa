@@ -34,7 +34,7 @@ const handleTechTopic = () => {
         ];
         cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
     }
-    response = messages.carousel(cards);
+    return messages.carousel(cards);
 };
 
 module.exports = {
