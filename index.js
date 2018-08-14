@@ -137,10 +137,15 @@ function handlePostback(sender_psid, received_postback) {
                 messages.webURLButton('Share on Twitter', utils.getShareLink('tw', techArticles[i].title, techArticles[i].url)),
                 messages.webURLButton('Share on LinkedIn', utils.getShareLink('li', techArticles[i].title, techArticles[i].url))
             ];
+            console.log("BUTTONS!!!!!!");
+            console.log(buttons);
             cards.push(messages.card(techArticles[i].title, '', '', techArticles[i].url, buttons));
         }
-
+        console.log("CARDS!!!!!!");
+        console.log(cards);
         response = messages.carousel(cards);
+        console.log("RESPONSE!!!!!");
+        console.log(response);
     }
 
     // Send the message to acknowledge the postback
