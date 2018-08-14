@@ -113,8 +113,9 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
     let response;
 
+    // Start typing
     api.sendAction(sender_psid, events.MARK_SEEN);
-  
+
     // Get the payload for the postback
     let payload = received_postback.payload;
   
@@ -125,6 +126,9 @@ function handlePostback(sender_psid, received_postback) {
     } else if((payload === events.TOPIC_TECH)) {
         response = postback.handleTechTopic();
     }
+
+    // Stop typing
+    sendAction(sender_psid, events.TYPING_OFF);
 
     // Send the message to acknowledge the postback
     api.sendMessage(sender_psid, response);

@@ -6,7 +6,6 @@
  * Objects and methods to make calls to the Bot API.
  */
 
-const events = require("../constants/events.js");
 const config = require("../constants/config.js");
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -22,7 +21,6 @@ const sendMessage = (sender_psid, message) => {
         },
         message: message
     }
-    sendAction(sender_psid, events.TYPING_OFF);
     callSendAPI(request_body);
 };
 
