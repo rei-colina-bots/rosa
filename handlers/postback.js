@@ -61,7 +61,7 @@ const handleSocialNetworks = () => {
 };
 
 const handleShare = () => {
-    replies = [
+    let replies = [
         messages.quickReply('Facebook', '-', ''),
         messages.quickReply('Twitter', '-', ''),
         messages.quickReply('LinkedIn', '-', ''),
