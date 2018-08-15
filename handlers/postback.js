@@ -49,7 +49,7 @@ const handleSocialNetworks = () => {
     cards.push(messages.card(text.TWITTER, config.TW_LOGO_URL, '', config.TW, [
         messages.webURLButton(text.SIGN_IN, config.TW),
     ]));
-    cards.push(messages.card(text.FACEBOOK, config.FB_LOGO_URL, '', config.LI, [
+    cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
     return messages.carousel(cards);
