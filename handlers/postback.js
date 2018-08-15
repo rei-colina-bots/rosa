@@ -32,6 +32,8 @@ const handleFeed = async (feedType) => {
         feed = articles.getTech();
     } else if (feedType === events.TOPIC_BBC) {
         feed = await articles.getFromRssFeed(config.RSS_BBC);
+        console.log('FEED - handleFeed!!!!');
+        console.log(feed.length);
     } else if (feedType === events.TOPIC_HBR) {
         feed = articles.getFromRssFeed(config.RSS_HBR);
     } else if (feedType === events.TOPIC_WIRED) {

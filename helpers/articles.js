@@ -40,6 +40,8 @@ const getFromRssFeed = async (rssUrl) => {
     let articles = [];
     let parser = new Parser();
     let feed = await parser.parseURL(rssUrl);
+    console.log('FEED - getFromRssFeed!!!!');
+    console.log(feed.length);
     let i = 0;
     if (feed.length > 0) {
         while (articles.length < config.MAX_ARTICLES) {
