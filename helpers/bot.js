@@ -35,7 +35,9 @@ const setup = (res) => {
                             messages.postbackButton(text.MENU_TECH,
                                 events.TOPIC_TECH)
                         ]
-                    }
+                    },
+                    messages.postbackButton(text.MENU_SOCIAL,
+                        events.MENU_SOCIAL)
                   ]
                 }
               ]

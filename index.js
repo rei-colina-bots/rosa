@@ -125,6 +125,8 @@ function handlePostback(sender_psid, received_postback) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
         response = postback.handleTechTopic();
+    } else if(payload === events.MENU_SOCIAL) {
+        response = postback.handleSocialNetworks();
     }
 
     // Stop typing

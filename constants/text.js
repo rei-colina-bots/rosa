@@ -14,6 +14,11 @@ module.exports = {
     SHARE_ON_LI: 'Share on LinkedIn',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗂 Topics',
-    MENU_TECH: '🛰 Technology'
+    MENU_TECH: '🛰 Technology & Science',
+    MENU_SOCIAL: '📱 Social Networks',
+    TWITTER: 'Twitter',
+    FACEBOOK: 'Facebook',
+    LINKEDIN: 'LinkedIn',
+    SIGN_IN: 'Sign In & View'
 }
 
