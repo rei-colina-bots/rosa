@@ -32,8 +32,8 @@ const handleFeed = async (feedType) => {
         feed = await articles.getTech();
     } else if (feedType === events.TOPIC_REUTERS) {
         feed = await articles.getFromRssFeed(config.RSS_REUTERS);
-    } else if (feedType === events.TOPIC_INC_LEAD) {
-        feed = await articles.getFromRssFeed(config.RSS_INC_LEAD);
+    } else if (feedType === events.TOPIC_ENT_LEAD) {
+        feed = await articles.getFromRssFeed(config.RSS_ENT_LEAD);
     }
 
     feed.forEach((article) => {

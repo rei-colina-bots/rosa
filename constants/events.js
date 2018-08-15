@@ -11,7 +11,7 @@ module.exports = {
     TOPIC_BBC: 'topic-bbc',
     TOPIC_REUTERS: 'topic-reuters',
     TOPIC_HBR: 'topic-hbr',
-    TOPIC_INC_LEAD: 'topic-inc-lead',
+    TOPIC_ENT_LEAD: 'topic-inc-lead',
     TOPIC_WIRED: 'topic-wired',
     MENU_SOCIAL: 'social-networks',
     GET_STARTED: 'get-started',

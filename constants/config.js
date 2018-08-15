@@ -22,6 +22,7 @@ module.exports = {
     RSS_REUTERS: 'http://feeds.reuters.com/Reuters/worldNews',
     RSS_WIRED: 'https://www.wired.com/feed/rss',
     RSS_HBR: 'https://flipboard.com/topic/leadership.rss',
-    RSS_INC_LEAD: 'https://www.inc.com/rss/lead'
+    RSS_INC_LEAD: 'https://www.inc.com/rss/lead',
+    RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss'
 }
 

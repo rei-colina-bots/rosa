@@ -129,8 +129,8 @@ async function  handlePostback(sender_psid, received_postback) {
         response = postback.handleSocialNetworks();
     } else if(payload === events.TOPIC_REUTERS) {
         response = await postback.handleFeed(events.TOPIC_REUTERS);
-    } else if(payload === events.TOPIC_INC_LEAD) {
-        response = await postback.handleFeed(events.TOPIC_INC_LEAD);
+    } else if(payload === events.TOPIC_ENT_LEAD) {
+        response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
     } else {
         response = messages.text(text.COMING_SOON);
     }

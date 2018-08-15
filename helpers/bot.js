@@ -34,8 +34,8 @@ const setup = (res) => {
                         call_to_actions: [
                             messages.postbackButton(text.MENU_TECH,
                                 events.TOPIC_TECH),
-                            messages.postbackButton(text.MENU_INC_LEAD,
-                                events.TOPIC_INC_LEAD),
+                            messages.postbackButton(text.MENU_ENT_LEAD,
+                                events.TOPIC_ENT_LEAD),
                             messages.postbackButton(text.MENU_REUTERS,
                                 events.TOPIC_REUTERS)
                         ]

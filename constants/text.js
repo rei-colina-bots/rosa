@@ -18,7 +18,7 @@ module.exports = {
     MENU_BBC: '🌎 BBC',
     MENU_REUTERS: '🌎 Reuters',
     MENU_HBR: '💼 Harvard Business Review',
-    MENU_INC_LEAD: '💼 Inc - Leadership',
+    MENU_ENT_LEAD: '💼 Entrepreneur - Leadership',
     MENU_WIRED: '🔌 Wired',
     MENU_SOCIAL: '📱 Social Networks',
     TWITTER: 'Twitter',
