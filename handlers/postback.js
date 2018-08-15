@@ -31,9 +31,7 @@ const handleFeed = (feedType) => {
     if (feedType === events.TOPIC_TECH) {
         feed = articles.getTech();
     } else if (feedType === events.TOPIC_BBC) {
-        articles.getFromRssFeed(config.RSS_BBC).then(items => {
-            feed = items;
-        });
+        articles.getFromRssFeed(config.RSS_BBC);
     } else if (feedType === events.TOPIC_HBR) {
         feed = articles.getFromRssFeed(config.RSS_HBR);
     } else if (feedType === events.TOPIC_WIRED) {

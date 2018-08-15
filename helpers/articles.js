@@ -33,6 +33,9 @@ const getTech = () => {
     return articles;
 };
 
+/*
+ * Retrieves articles from a given RSS feed
+ */
 const getFromRssFeed = async (rssUrl) => {
     let articles = [];
     let parser = new Parser();
