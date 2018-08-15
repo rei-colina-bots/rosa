@@ -30,12 +30,10 @@ const handleFeed = async (feedType) => {
 
     if (feedType === events.TOPIC_TECH) {
         feed = await articles.getTech();
-    } else if (feedType === events.TOPIC_BBC) {
-        feed = await articles.getFromRssFeed(config.RSS_BBC);
-    } else if (feedType === events.TOPIC_HBR) {
-        feed = await articles.getFromRssFeed(config.RSS_HBR);
-    } else if (feedType === events.TOPIC_WIRED) {
-        feed = await articles.getFromRssFeed(config.RSS_WIRED);
+    } else if (feedType === events.TOPIC_REUTERS) {
+        feed = await articles.getFromRssFeed(config.RSS_REUTERS);
+    } else if (feedType === events.TOPIC_INC_LEAD) {
+        feed = await articles.getFromRssFeed(config.RSS_INC_LEAD);
     }
 
     feed.forEach((article) => {

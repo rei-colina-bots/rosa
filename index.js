@@ -127,12 +127,10 @@ async function  handlePostback(sender_psid, received_postback) {
         response = await postback.handleFeed(events.TOPIC_TECH);
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
-    } else if(payload === events.TOPIC_BBC) {
-        response = await postback.handleFeed(events.TOPIC_BBC);
-    } else if(payload === events.TOPIC_HBR) {
-        response = await postback.handleFeed(events.TOPIC_HBR);
-    } else if(payload === events.TOPIC_WIRED) {
-        response = await postback.handleFeed(events.TOPIC_WIRED);
+    } else if(payload === events.TOPIC_REUTERS) {
+        response = await postback.handleFeed(events.TOPIC_REUTERS);
+    } else if(payload === events.TOPIC_INC_LEAD) {
+        response = await postback.handleFeed(events.TOPIC_INC_LEAD);
     } else {
         response = messages.text(text.COMING_SOON);
     }
