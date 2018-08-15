@@ -127,7 +127,7 @@ function handlePostback(sender_psid, received_postback) {
         response = postback.handleTechTopic();
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
-    } else if (payload.event === 'share') {
+    } else if (JSON.parse(payload).event === 'share') {
         response = postback.handleShare();
     }
 
