@@ -30,7 +30,12 @@ const handleTechTopic = () => {
         buttons = [
             messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
             messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
+            messages.postbackButton('Share', {
+                event: 'share',
+                title: article.title,
+                url: article.url
+            })
+            // messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
     });
@@ -55,8 +60,18 @@ const handleSocialNetworks = () => {
     return messages.carousel(cards);
 };
 
+const handleShare = () => {
+    replies = [
+        messages.quickReply('Facebook', '-', ''),
+        messages.quickReply('Twitter', '-', ''),
+        messages.quickReply('LinkedIn', '-', ''),
+    ];
+    return messages.quickReplies('Which social network would you like to share to?', replies);
+};
+
 module.exports = {
     handleGetStarted,
     handleTechTopic,
-    handleSocialNetworks
+    handleSocialNetworks,
+    handleShare
 }

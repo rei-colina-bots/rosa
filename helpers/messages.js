@@ -70,11 +70,35 @@ const text = (message) => {
     }
 };
 
+/*
+ * Quick reply button
+ */
+const quickReply = (title, payload, image_url) => {
+    return {
+        content_type: 'text',
+        title: title,
+        payload: payload,
+        image_url: image_url
+    }
+};
+
+/*
+ * Message with quick replies
+ */
+const quickReplies = (message, replies) => {
+    return {
+        text: message,
+        quick_replies: replies
+    }
+};
+
 module.exports = {
     postbackButton,
     webURLButton,
     card,
     carousel,
-    text
+    text,
+    quickReply,
+    quickReplies
 }
 
