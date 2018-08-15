@@ -40,20 +40,20 @@ const getFromRssFeed = async (rssUrl) => {
     let articles = [];
     let parser = new Parser();
     let feed = await parser.parseURL(rssUrl);
-    console.log('FEED - getFromRssFeed!!!!');
-    console.log(feed.length);
     let i = 0;
-    if (feed.length > 0) {
+    if (feed.items.length > 0) {
         while (articles.length < config.MAX_ARTICLES) {
-            if (feed[i].title && feed[i].link) {
+            if (feed.items[i].title && feed.items[i].link) {
                 articles.push({
-                    title: feed[i].title,
-                    url: feed[i].link
+                    title: feed.items[i].title,
+                    url: feed.items[i].link
                 });
             }
             i = i + 1;
         }
     }
+    console.log('FEED - getFromRssFeed!!!!');
+    console.log(articles.length);
     return articles;
 };
 
