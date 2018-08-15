@@ -33,10 +33,10 @@ const getTech = () => {
     return articles;
 };
 
-const getFromRssFeed = (rssUrl) => {
+const getFromRssFeed = async (rssUrl) => {
     let articles = [];
     let parser = new Parser();
-    let feed = parser.parseURL(rssUrl);
+    let feed = await parser.parseURL(rssUrl);
     console.log('FEED!!!!!!');
     console.log(feed);
     let i = 0;
