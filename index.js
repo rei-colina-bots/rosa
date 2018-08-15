@@ -127,6 +127,8 @@ function handlePostback(sender_psid, received_postback) {
         response = postback.handleTechTopic();
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
+    } else {
+        response = messages.text(text.COMING_SOON);
     }
 
     // Stop typing

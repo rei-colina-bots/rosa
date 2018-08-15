@@ -32,8 +32,14 @@ const setup = (res) => {
                         title: text.MENU_TOPICS,
                         type: 'nested',
                         call_to_actions: [
+                            messages.postbackButton(text.MENU_BBC,
+                                events.TOPIC_BBC),
+                            messages.postbackButton(text.MENU_HBR,
+                                events.TOPIC_HBR),
                             messages.postbackButton(text.MENU_TECH,
-                                events.TOPIC_TECH)
+                                events.TOPIC_TECH),
+                            messages.postbackButton(text.MENU_WIRED,
+                                events.TOPIC_WIRED)
                         ]
                     },
                     messages.postbackButton(text.MENU_SOCIAL,
