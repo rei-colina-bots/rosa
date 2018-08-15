@@ -124,9 +124,11 @@ function handlePostback(sender_psid, received_postback) {
     if (payload === events.GET_STARTED) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
-        response = postback.handleTechTopic();
+        response = postback.handleFeed(events.TOPIC_TECH);
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
+    } else if(payload === events.TOPIC_BBC) {
+        response = postback.handleFeed(events.TOPIC_BBC);
     } else {
         response = messages.text(text.COMING_SOON);
     }

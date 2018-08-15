@@ -8,7 +8,7 @@
 
 module.exports = {
     ECHO: 'You sent the message: "${received_message.text}".',
-    GET_STARTED: 'There is a menu down below 👇🏼 where you can: \n - Get the latest articles from my favorite news feeds 🗞, \n - Take a look at your own social networks 📱',
+    GET_STARTED: 'There is a menu 💬 down below 👇🏼 where you can: \n - Get the latest articles from my favorite news feeds 🗞 \n - Take a look at your own social networks 📱',
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',

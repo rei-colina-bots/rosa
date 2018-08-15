@@ -17,6 +17,9 @@ module.exports = {
     TW_SHARE_URL: 'https://twitter.com/intent/tweet?text=',
     LI_SHARE_URL: 'https://www.linkedin.com/shareArticle?mini=true&url=',
     FB_API_URL: 'https://graph.facebook.com/v2.6/me/',
-    MAX_ARTICLES: 5
+    MAX_ARTICLES: 5,
+    RSS_BBC: 'http://feeds.bbci.co.uk/news/rss.xml',
+    RSS_WIRED: 'https://www.wired.com/feed/rss',
+    RSS_HBR: 'http://feeds.hbr.org/harvardbusiness'
 }
 

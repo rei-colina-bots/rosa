@@ -9,6 +9,7 @@
 const messages = require("../helpers/messages.js");
 const text = require("../constants/text.js");
 const config = require("../constants/config.js");
+const events = require("../constants/events.js");
 const utils = require("../helpers/utils.js");
 const articles = require("../helpers/articles.js");
 
@@ -22,11 +23,22 @@ const handleGetStarted = () => {
 /*
  * Returns a response to the TOPIC_TECH event
  */
-const handleTechTopic = () => {
-    let techArticles = articles.getTech();
+const handleFeed = (feedType) => {
+    let feed = [];
     let cards = [];
     let buttons = [];
-    techArticles.forEach((article) => {
+
+    if (feedType === events.TOPIC_TECH) {
+        feed = articles.getTech();
+    } else if (feedType === events.TOPIC_BBC) {
+        feed = articles.getFromRssFeed(config.RSS_BBC);
+    } else if (feedType === events.TOPIC_HBR) {
+        feed = articles.getFromRssFeed(config.RSS_HBR);
+    } else if (feedType === events.TOPIC_WIRED) {
+        feed = articles.getFromRssFeed(config.RSS_WIRED);
+    }
+
+    feed.forEach((article) => {
         buttons = [
             messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
             messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
@@ -57,6 +69,6 @@ const handleSocialNetworks = () => {
 
 module.exports = {
     handleGetStarted,
-    handleTechTopic,
+    handleFeed,
     handleSocialNetworks
 }
