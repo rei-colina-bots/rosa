@@ -124,15 +124,15 @@ async function  handlePostback(sender_psid, received_postback) {
     if (payload === events.GET_STARTED) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
-        response = postback.handleFeed(events.TOPIC_TECH);
+        response = await postback.handleFeed(events.TOPIC_TECH);
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
     } else if(payload === events.TOPIC_BBC) {
         response = await postback.handleFeed(events.TOPIC_BBC);
     } else if(payload === events.TOPIC_HBR) {
-        response = postback.handleFeed(events.TOPIC_HBR);
+        response = await postback.handleFeed(events.TOPIC_HBR);
     } else if(payload === events.TOPIC_WIRED) {
-        response = postback.handleFeed(events.TOPIC_WIRED);
+        response = await postback.handleFeed(events.TOPIC_WIRED);
     } else {
         response = messages.text(text.COMING_SOON);
     }
