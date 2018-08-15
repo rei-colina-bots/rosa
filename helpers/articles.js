@@ -37,6 +37,8 @@ const getFromRssFeed = (rssUrl) => {
     let articles = [];
     let parser = new Parser();
     let feed = parser.parseURL(rssUrl);
+    console.log('FEED!!!!!!');
+    console.log(feed);
     let i = 0;
     if (feed.length > 0) {
         while (articles.length < config.MAX_ARTICLES) {
