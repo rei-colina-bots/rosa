@@ -36,7 +36,7 @@ const getTech = () => {
 /*
  * Retrieves articles from a given RSS feed
  */
-const getFromRssFeed = (rssUrl) => {
+const getFromRssFeed = async (rssUrl) => {
     let articles = [];
     let parser = new Parser();
     let feed = await parser.parseURL(rssUrl);

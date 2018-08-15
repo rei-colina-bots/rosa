@@ -23,7 +23,7 @@ const handleGetStarted = () => {
 /*
  * Returns a response to the TOPIC_TECH event
  */
-const handleFeed = (feedType) => {
+const handleFeed = async (feedType) => {
     let feed = [];
     let cards = [];
     let buttons = [];
@@ -31,7 +31,7 @@ const handleFeed = (feedType) => {
     if (feedType === events.TOPIC_TECH) {
         feed = articles.getTech();
     } else if (feedType === events.TOPIC_BBC) {
-        feed = articles.getFromRssFeed(config.RSS_BBC);
+        feed = await articles.getFromRssFeed(config.RSS_BBC);
     } else if (feedType === events.TOPIC_HBR) {
         feed = articles.getFromRssFeed(config.RSS_HBR);
     } else if (feedType === events.TOPIC_WIRED) {

@@ -128,7 +128,7 @@ async function  handlePostback(sender_psid, received_postback) {
     } else if(payload === events.MENU_SOCIAL) {
         response = postback.handleSocialNetworks();
     } else if(payload === events.TOPIC_BBC) {
-        response = postback.handleFeed(events.TOPIC_BBC);
+        response = await postback.handleFeed(events.TOPIC_BBC);
     } else if(payload === events.TOPIC_HBR) {
         response = postback.handleFeed(events.TOPIC_HBR);
     } else if(payload === events.TOPIC_WIRED) {
