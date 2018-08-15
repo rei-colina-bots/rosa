@@ -52,8 +52,6 @@ const getFromRssFeed = async (rssUrl) => {
             i = i + 1;
         }
     }
-    console.log('FEED - getFromRssFeed!!!!');
-    console.log(articles.length);
     return articles;
 };
 

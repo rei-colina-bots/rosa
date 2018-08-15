@@ -29,15 +29,13 @@ const handleFeed = async (feedType) => {
     let buttons = [];
 
     if (feedType === events.TOPIC_TECH) {
-        feed = articles.getTech();
+        feed = await articles.getTech();
     } else if (feedType === events.TOPIC_BBC) {
         feed = await articles.getFromRssFeed(config.RSS_BBC);
-        console.log('FEED - handleFeed!!!!');
-        console.log(feed.length);
     } else if (feedType === events.TOPIC_HBR) {
-        feed = articles.getFromRssFeed(config.RSS_HBR);
+        feed = await articles.getFromRssFeed(config.RSS_HBR);
     } else if (feedType === events.TOPIC_WIRED) {
-        feed = articles.getFromRssFeed(config.RSS_WIRED);
+        feed = await articles.getFromRssFeed(config.RSS_WIRED);
     }
 
     feed.forEach((article) => {
