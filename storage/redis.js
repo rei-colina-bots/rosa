@@ -30,6 +30,8 @@ const set = (key, jsonValue, secondsToExpire) => {
  */
 const get = (key) => {
     client.get(key, function (err, reply) {
+        console.log('RESPONSE!!!!');
+        console.log(reply);
         if (err) {
             return "";
         }
