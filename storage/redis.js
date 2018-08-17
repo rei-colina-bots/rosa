@@ -6,7 +6,8 @@
  * Objects and methods to make calls to the Redis API.
  */
 
-const client = require('redis').createClient(process.env.REDIS_URL);
+const redis = require('redis')
+const client = redis.createClient(process.env.REDIS_URL);
 const config = require('../constants/config.js');
 
 client.on("error", function (err) {
