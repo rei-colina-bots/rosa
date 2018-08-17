@@ -124,13 +124,15 @@ async function  handlePostback(sender_psid, received_postback) {
     if (payload === events.GET_STARTED) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
-        response = await postback.handleFeed(events.TOPIC_TECH);
+      response = await postback.handleFeed(events.TOPIC_TECH);
     } else if(payload === events.MENU_SOCIAL) {
-        response = postback.handleSocialNetworks();
+      response = postback.handleSocialNetworks();
     } else if(payload === events.TOPIC_REUTERS) {
-        response = await postback.handleFeed(events.TOPIC_REUTERS);
+      response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
-        response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
+      response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
+    } else if (payload.startsWith('articles:')) {
+      response = await postback.handleShare(payload);
     } else {
         response = messages.text(text.COMING_SOON);
     }

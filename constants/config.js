@@ -23,6 +23,7 @@ module.exports = {
     RSS_WIRED: 'https://www.wired.com/feed/rss',
     RSS_HBR: 'https://flipboard.com/topic/leadership.rss',
     RSS_INC_LEAD: 'https://www.inc.com/rss/lead',
-    RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss'
+    RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss',
+    STORAGE_DEFAULT_EXPIRY: 3600 // 1 hour
 }
 

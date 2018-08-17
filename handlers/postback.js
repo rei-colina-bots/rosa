@@ -12,6 +12,7 @@ const config = require("../constants/config.js");
 const events = require("../constants/events.js");
 const utils = require("../helpers/utils.js");
 const articles = require("../helpers/articles.js");
+const storage = require("../storage/redis.js");
 
 /*
  * Returns a response to the GET_STARTED event
@@ -21,7 +22,7 @@ const handleGetStarted = () => {
 };
 
 /*
- * Returns a response to the TOPIC_TECH event
+ * Returns a response for TOPIC event
  */
 const handleFeed = async (feedType) => {
     let feed = [];
@@ -37,10 +38,15 @@ const handleFeed = async (feedType) => {
     }
 
     feed.forEach((article) => {
+        let articleId = 'articles:' + Math.random().toString(36).substr(2, 9);
+        storage.set(articleId, {
+            title: article.title, url: article.url
+        });
         buttons = [
             messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
             messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
+            // messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url)),
+            messages.postbackButton("Share", articleId)
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
     });
@@ -65,8 +71,17 @@ const handleSocialNetworks = () => {
     return messages.carousel(cards);
 };
 
+/*
+ * Returns a response to an article share event
+ */
+const handleShare = async (articleId) => {
+    let article = await storage.get(articleId)
+    return messages.text("share: " + article.title);
+};
+
 module.exports = {
     handleGetStarted,
     handleFeed,
-    handleSocialNetworks
+    handleSocialNetworks,
+    handleShare
 }
