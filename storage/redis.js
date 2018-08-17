@@ -28,8 +28,8 @@ const set = (key, jsonValue, secondsToExpire) => {
 /*
  * Get value
  */
-const get = (key) => {
-    return client.get(key, function (err, reply) {
+const get = async (key) => {
+    client.get(key, function (err, reply) {
         console.log('RESPONSE!!!!');
         console.log(reply);
         if (err) {
