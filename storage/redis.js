@@ -17,8 +17,11 @@ client.on("error", function (err) {
  * Set value
  */
 const set = (key, jsonValue, secondsToExpire) => {
+    console.log('KEY!!!!');
+    console.log(key);
+    console.log(JSON.stringify(jsonValue));
     let expiry = secondsToExpire || config.STORAGE_DEFAULT_EXPIRY;
-    client.set(key, JSON.stringify(jsonValue), 'EX', expiry);
+    client.set(key, JSON.stringify(jsonValue), 'EX', expiry, redis.print);
 };
 
 /*
