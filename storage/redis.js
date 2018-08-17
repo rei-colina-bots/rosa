@@ -28,14 +28,18 @@ const set = (key, jsonValue, secondsToExpire) => {
 /*
  * Get value
  */
-const get = async (key) => {
-    client.get(key, function (err, reply) {
-        console.log('RESPONSE!!!!');
-        console.log(reply);
-        if (err) {
-            return "";
-        }
-        return JSON.parse(reply.toString());
+const get = (key) => {
+    // Return new promise 
+    return new Promise(function(resolve, reject) {
+        // Do async job
+        client.get(key, function (err, reply) {
+            console.log('RESPONSE!!!!');
+            console.log(reply);
+            if (err) {
+                reject(err);
+            }
+            resolve(JSON.parse(reply.toString()));
+        });
     });
 };
 
