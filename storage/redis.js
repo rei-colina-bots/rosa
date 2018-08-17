@@ -18,8 +18,6 @@ client.on("error", function (err) {
  * Set value
  */
 const set = (key, jsonValue, secondsToExpire) => {
-    console.log('KEY!!!!');
-    console.log(key);
     console.log(JSON.stringify(jsonValue));
     let expiry = secondsToExpire || config.STORAGE_DEFAULT_EXPIRY;
     client.set(key, JSON.stringify(jsonValue), 'EX', expiry, redis.print);
@@ -33,8 +31,6 @@ const get = (key) => {
     return new Promise(function(resolve, reject) {
         // Do async job
         client.get(key, function (err, reply) {
-            console.log('RESPONSE!!!!');
-            console.log(reply);
             if (err) {
                 reject(err);
             }

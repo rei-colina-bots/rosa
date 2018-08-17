@@ -75,11 +75,7 @@ const handleSocialNetworks = () => {
  * Returns a response to an article share event
  */
 const handleShare = async (articleId) => {
-    console.log('ARTICLE_ID!!!');
-    console.log(articleId);
     let article = await storage.get(articleId);
-    console.log('ARTICLE!!!');
-    console.log(article);
     return messages.text("share: " + article.title);
 };
 
