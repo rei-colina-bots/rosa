@@ -102,11 +102,7 @@ async function handleMessage(sender_psid, received_message) {
 
     // Check if the message contains text
     if (received_message.text) {
-      let payload = received_message.quick_reply.payload;
-      if (payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
-        response = await postback.handleShareToNetwork(
-          payload,received_message.text);
-      }
+      response = messages.text(text.COMING_SOON);
     }  
     
     // Stop typing
@@ -138,8 +134,6 @@ async function  handlePostback(sender_psid, received_postback) {
       response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
       response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
-    } else if (payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
-      response = await postback.handleShare(payload);
     } else {
         response = messages.text(text.COMING_SOON);
     }

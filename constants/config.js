@@ -25,6 +25,6 @@ module.exports = {
     RSS_INC_LEAD: 'https://www.inc.com/rss/lead',
     RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss',
     STORAGE_DEFAULT_EXPIRY: 3600, // 1 hour
-    STORAGE_ARTICLE_SHARE: 'articleShare',
+    // STORAGE_ARTICLES: 'articles',
 }
 

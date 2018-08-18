@@ -38,12 +38,14 @@ const handleFeed = async (feedType) => {
     }
 
     feed.forEach((article) => {
-        let articleId = utils.generateId(config.STORAGE_ARTICLE_SHARE);
-        storage.set(articleId, {
-            title: article.title, url: article.url
-        });
+        // let articleId = utils.generateId(config.STORAGE_ARTICLES);
+        // storage.set(articleId, {
+        //     title: article.title, url: article.url
+        // });
         buttons = [
-            messages.postbackButton(text.SHARE, articleId)
+            messages.webURLButton(text.SHARE, 
+                'www.google.com/?title=' + artivle.title + '&url=' + article.url),
+            messages.postbackButton(text.SAVE, 'bookmark')
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
     });
@@ -68,38 +70,8 @@ const handleSocialNetworks = () => {
     return messages.carousel(cards);
 };
 
-/*
- * Returns a response to an article share event
- */
-const handleShare = async (articleId) => {
-    let article = await storage.get(articleId);
-    if (!article) {
-        return messages.text(text.ARTICLE_NOT_AVAILABLE);
-    }
-    let replies = [
-        messages.quickReply(text.FACEBOOK, articleId),
-        messages.quickReply(text.TWITTER, articleId),
-        messages.quickReply(text.LINKEDIN, articleId),
-    ];
-    return messages.quickReplies(text.SHARE_QUESTION, replies)
-};
-
-const handleShareToNetwork = async (articleId, network) => {
-    let article = await storage.get(articleId);
-    let buttons = [
-        messages.webURLButton(
-            text.SHARE_ON + network,
-            utils.getShareLink(network, article.title, article.url)),
-    ];
-    return messages.carousel([
-        messages.card(article.title, '', '',article.url, buttons)
-    ]);
-}
-
 module.exports = {
     handleGetStarted,
     handleFeed,
-    handleSocialNetworks,
-    handleShare,
-    handleShareToNetwork
+    handleSocialNetworks
 }
