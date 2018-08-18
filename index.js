@@ -99,7 +99,7 @@ app.get('/setup', (req, res) => {
 
 // Sharing page
 app.get('/share', (req, res) => {
-  res.render('index', { title : 'Share' });
+  res.render('share', { title : 'Share' });
 });
 
 // Handles messages events
