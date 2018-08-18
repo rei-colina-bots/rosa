@@ -102,10 +102,9 @@ async function handleMessage(sender_psid, received_message) {
 
     // Check if the message contains text
     if (received_message.text) {
-      if (received_message.payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
-        response = postback.handleShareToNetwork(
-          received_message.quick_reply.payload,
-          received_message.text);
+      let payload = received_message.quick_reply.payload;
+      if (payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
+        response = postback.handleShareToNetwork(payload, received_message.text);
       }
     }  
     
