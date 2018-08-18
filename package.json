@@ -21,6 +21,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "hackernews-api": "^1.0.0",
+    "jade": "^1.11.0",
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "rss-parser": "^3.4.3"

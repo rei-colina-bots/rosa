@@ -13,6 +13,10 @@ const
   postback = require("./handlers/postback.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
+// Set up the template engine
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade')
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -93,6 +97,11 @@ app.get('/setup', (req, res) => {
     bot.setup(res);
 });
 
+// Sharing page
+app.get('/setup', (req, res) => {
+  res.render('index', { title : 'Share' });
+});
+
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
     let response;
@@ -125,7 +134,7 @@ async function  handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     api.sendAction(sender_psid, events.TYPING_ON);
 
-    
+
     if (payload === events.GET_STARTED) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
