@@ -92,9 +92,9 @@ const handleShareToNetwork = async (articleId, network) => {
             utils.getShareLink(network, article.title, article.url)),
     ];
     let response = messages.card(article.title, '', '', article.url, buttons);
-    console.log('RESPONSE!!!!!');
-    console.log(response);
-    return response;
+    // console.log('RESPONSE!!!!!');
+    // console.log(response);
+    return messages.carousel([response]);
 }
 
 module.exports = {
