@@ -11,6 +11,7 @@ const
   config = require("./constants/config.js"),
   events = require("./constants/events.js"),
   postback = require("./handlers/postback.js"),
+  utils = require("./helpers/utils"),
   app = express().use(bodyParser.json()); // creates express http server
 
 // Set up the template engine
@@ -99,7 +100,12 @@ app.get('/setup', (req, res) => {
 
 // Sharing page
 app.get('/share', (req, res) => {
-  res.render('share', { title : 'Share' });
+  let params = {
+    fbUrl: utils.getShareLink(text.FACEBOOK, req.query.title, req.query.url),
+    twUrl: utils.getShareLink(text.TWITTER, req.query.title, req.query.url),
+    liUrl: utils.getShareLink(text.LINKEDIN, req.query.title, req.query.url),
+  };
+  res.render('share', params);
 });
 
 // Handles messages events
