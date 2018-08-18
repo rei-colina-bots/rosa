@@ -104,7 +104,8 @@ async function handleMessage(sender_psid, received_message) {
     if (received_message.text) {
       let payload = received_message.quick_reply.payload;
       if (payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
-        response = postback.handleShareToNetwork(payload, received_message.text);
+        response = await postback.handleShareToNetwork(
+          payload,received_message.text);
       }
     }  
     
