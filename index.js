@@ -14,7 +14,7 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 
 // Set up the template engine
-app.set('views', '/views')
+app.set('views', './views')
 app.set('view engine', 'jade')
 
 // Sets server port and logs message on success
