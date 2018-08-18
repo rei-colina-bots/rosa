@@ -91,8 +91,9 @@ const handleShareToNetwork = async (articleId, network) => {
             text.SHARE_ON + network,
             utils.getShareLink(network, article.title, article.url)),
     ];
-    return messages.card(article.title, '', '',
-        article.url, buttons);
+    return messages.carousel([
+        messages.card(article.title, '', '',article.url, buttons)
+    ]);
 }
 
 module.exports = {
