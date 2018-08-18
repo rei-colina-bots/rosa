@@ -28,7 +28,7 @@ const getShareLink = (network, title, url) => {
 * Generates a unique ID
 */
 const generateId = (type) => {
-    return type + Math.random().toString(36).substr(2, 9);
+    return type + ':' + Math.random().toString(36).substr(2, 9);
 };
 
 

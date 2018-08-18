@@ -28,6 +28,7 @@ module.exports = {
     SIGN_IN: 'Sign In & View',
     COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼',
     SHARE: 'Share',
-    SHARE_QUESTION: '. What social network would you like to share this on?'
+    SHARE_QUESTION: '. What social network would you like to share this on?',
+    ARTICLE_NOT_AVAILABLE: 'Sorry 🙄 this article is no longer available for you to share.'
 }
 

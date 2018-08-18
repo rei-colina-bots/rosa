@@ -73,6 +73,9 @@ const handleSocialNetworks = () => {
  */
 const handleShare = async (articleId) => {
     let article = await storage.get(articleId);
+    if (!article) {
+        return messages.text(text.ARTICLE_NOT_AVAILABLE);
+    }
     let replies = [
         messages.quickReply(text.FACEBOOK, articleId),
         messages.quickReply(text.TWITTER, articleId),
