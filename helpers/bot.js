@@ -41,7 +41,9 @@ const setup = (res) => {
                         ]
                     },
                     messages.postbackButton(text.MENU_SOCIAL,
-                        events.MENU_SOCIAL)
+                        events.MENU_SOCIAL),
+                    messages.postbackButton(text.MENU_BOOKMARKS,
+                        events.MENU_BOOKMARKS),
                   ]
                 }
               ]

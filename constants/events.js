@@ -14,6 +14,7 @@ module.exports = {
     TOPIC_ENT_LEAD: 'topic-inc-lead',
     TOPIC_WIRED: 'topic-wired',
     MENU_SOCIAL: 'social-networks',
+    MENU_BOOKMARKS: 'bookmarks',
     GET_STARTED: 'get-started',
     MARK_SEEN: 'mark_seen',
     TYPING_ON: 'typing_on',
