@@ -98,7 +98,7 @@ app.get('/setup', (req, res) => {
 });
 
 // Sharing page
-app.get('/setup', (req, res) => {
+app.get('/share', (req, res) => {
   res.render('index', { title : 'Share' });
 });
 
