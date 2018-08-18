@@ -12,6 +12,7 @@ module.exports = {
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',
+    SHARE_ON: 'Share on ',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗞 News Feeds',
     MENU_TECH: '👨🏻‍💻 Hacker News',
@@ -25,6 +26,8 @@ module.exports = {
     FACEBOOK: 'Facebook',
     LINKEDIN: 'LinkedIn',
     SIGN_IN: 'Sign In & View',
-    COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼'
+    COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼',
+    SHARE: 'Share',
+    SHARE_QUESTION: '. What social network would you like to share this on?'
 }
 

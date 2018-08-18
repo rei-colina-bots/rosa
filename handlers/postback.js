@@ -38,15 +38,12 @@ const handleFeed = async (feedType) => {
     }
 
     feed.forEach((article) => {
-        let articleId = 'articles:' + Math.random().toString(36).substr(2, 9);
+        let articleId = utils.generateId(config.STORAGE_ARTICLE_SHARE);
         storage.set(articleId, {
             title: article.title, url: article.url
         });
         buttons = [
-            messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
-            // messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url)),
-            messages.postbackButton("Share", articleId)
+            messages.postbackButton(text.SHARE, articleId)
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
     });
@@ -76,12 +73,29 @@ const handleSocialNetworks = () => {
  */
 const handleShare = async (articleId) => {
     let article = await storage.get(articleId);
-    return messages.text("share: " + article.title);
+    let replies = [
+        messages.quickReply(text.FACEBOOK, articleId),
+        messages.quickReply(text.TWITTER, articleId),
+        messages.quickReply(text.LINKEDIN, articleId),
+    ];
+    return messages.quickReplies(
+        '"' + article + '"' + text.SHARE_QUESTION, replies)
 };
+
+const handleShareToNetwork = async (articleId, network) => {
+    let article = await storage.get(articleId);
+    buttons = [
+        messages.webURLButton(
+            text.SHARE_ON + network,
+            utils.getShareLink(network, article.title, article.url)),
+    ];
+    return messages.card(article.title, '', '', article.url, buttons);
+}
 
 module.exports = {
     handleGetStarted,
     handleFeed,
     handleSocialNetworks,
-    handleShare
+    handleShare,
+    handleShareToNetwork
 }

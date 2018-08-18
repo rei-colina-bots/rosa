@@ -8,6 +8,7 @@ const
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
   text = require("./constants/text.js"),
+  config = require("./constants/config.js"),
   events = require("./constants/events.js"),
   postback = require("./handlers/postback.js"),
   app = express().use(bodyParser.json()); // creates express http server
@@ -93,7 +94,7 @@ app.get('/setup', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+async function handleMessage(sender_psid, received_message) {
     let response;
     
     api.sendAction(sender_psid, events.MARK_SEEN);
@@ -101,10 +102,15 @@ function handleMessage(sender_psid, received_message) {
 
     // Check if the message contains text
     if (received_message.text) {
-      // Create the payload for a basic text message
-      response = messages.text(text.ECHO);
+      if (received_message.payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
+        response = postback.handleShareToNetwork(received_message.payload,
+          received_message.text);
+      }
     }  
     
+    // Stop typing
+    api.sendAction(sender_psid, events.TYPING_OFF);
+
     // Sends the response message
     api.sendMessage(sender_psid, response);
 }
@@ -131,7 +137,7 @@ async function  handlePostback(sender_psid, received_postback) {
       response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
       response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
-    } else if (payload.startsWith('articles:')) {
+    } else if (payload.startsWith(config.STORAGE_ARTICLE_SHARE)) {
       response = await postback.handleShare(payload);
     } else {
         response = messages.text(text.COMING_SOON);
