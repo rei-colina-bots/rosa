@@ -29,6 +29,6 @@ module.exports = {
     COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼',
     SHARE: 'Share',
     SAVE: 'Save for Later',
-    MENU_BOOKMARKS: 'Saved Articles' 
+    MENU_BOOKMARKS: '🗄 Saved Articles' 
 }
 

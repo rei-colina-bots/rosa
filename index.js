@@ -124,6 +124,8 @@ async function  handlePostback(sender_psid, received_postback) {
   
     // Set the response based on the postback payload
     api.sendAction(sender_psid, events.TYPING_ON);
+
+    
     if (payload === events.GET_STARTED) {
       response = postback.handleGetStarted();
     } else if((payload === events.TOPIC_TECH)) {
