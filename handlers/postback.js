@@ -81,13 +81,12 @@ const handleShare = async (articleId) => {
         messages.quickReply(text.TWITTER, articleId),
         messages.quickReply(text.LINKEDIN, articleId),
     ];
-    return messages.quickReplies(
-        '"' + article + '"' + text.SHARE_QUESTION, replies)
+    return messages.quickReplies(text.SHARE_QUESTION, replies)
 };
 
 const handleShareToNetwork = async (articleId, network) => {
     let article = await storage.get(articleId);
-    buttons = [
+    let buttons = [
         messages.webURLButton(
             text.SHARE_ON + network,
             utils.getShareLink(network, article.title, article.url)),
