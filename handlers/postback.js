@@ -44,7 +44,7 @@ const handleFeed = async (feedType) => {
         // });
         buttons = [
             messages.webURLButton(text.SHARE, 
-                'share?title=' + article.title + '&url=' + article.url),
+                process.env.APP_URL + 'share?title=' + article.title + '&url=' + article.url),
             messages.postbackButton(text.SAVE, 'bookmark')
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
