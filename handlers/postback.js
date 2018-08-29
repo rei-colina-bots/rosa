@@ -27,20 +27,24 @@ const handleFeed = async (feedType) => {
     let feed = [];
     let cards = [];
     let buttons = [];
+    let image = ''
 
     if (feedType === events.TOPIC_TECH) {
         feed = await articles.getTech();
+        image = config.HN_LOGO_URL;
     } else if (feedType === events.TOPIC_REUTERS) {
         feed = await articles.getFromRssFeed(config.RSS_REUTERS);
+        image = config.REUTERS_LOGO_URL;
     } else if (feedType === events.TOPIC_ENT_LEAD) {
         feed = await articles.getFromRssFeed(config.RSS_ENT_LEAD);
+        image = config.ENT_LOGO_URL;
     }
 
     feed.forEach((article) => {
         buttons = [
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, '', '', article.url, buttons));
+        cards.push(messages.card(article.title, image, '', article.url, buttons));
     });
     return messages.carousel(cards);
 };
