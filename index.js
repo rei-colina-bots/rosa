@@ -133,8 +133,7 @@ async function  handlePostback(sender_psid, received_postback) {
     } else if(payload === events.TOPIC_ENT_LEAD) {
         response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
     } else if (title ===  text.SHARE) {
-        let article = JSON.parse(payload);
-        response = postback.handleShare(article.title, article.url);
+        response = postback.handleShare(JSON.parse(payload));
     } else {
         response = messages.text(text.COMING_SOON);
     }

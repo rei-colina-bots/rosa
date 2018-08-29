@@ -66,16 +66,16 @@ const handleSocialNetworks = () => {
 /*
  * Returns a response to the SHARE event
  */
-const handleShare = (title, url) => {
+const handleShare = (article) => {
     let cards = [];
 
-    cards.push(messages.card(title, config.FB_LOGO_URL, '', '', [
+    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
     ]));
-    cards.push(messages.card(title, config.TW_LOGO_URL, '', '', [
+    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
     ]));
-    cards.push(messages.card(title, config.LI_LOGO_URL, '', '', [
+    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url)),
     ]));
     return messages.carousel(cards);
