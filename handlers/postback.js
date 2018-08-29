@@ -68,15 +68,19 @@ const handleSocialNetworks = () => {
  */
 const handleShare = (article) => {
     let cards = [];
+    let shareLink = '';
 
-    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', '', [
-        messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
+    shareLink = utils.getShareLink('fb', article.title, article.url);
+    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_FB, shareLink),
     ]));
-    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', '', [
-        messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
+    shareLink = utils.getShareLink('tw', article.title, article.url);
+    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_TW, shareLink),
     ]));
-    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', '', [
-        messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url)),
+    shareLink = utils.getShareLink('li', article.title, article.url);
+    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_LI, shareLink),
     ]));
     return messages.carousel(cards);
 };
