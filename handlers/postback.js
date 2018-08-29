@@ -38,9 +38,7 @@ const handleFeed = async (feedType) => {
 
     feed.forEach((article) => {
         buttons = [
-            messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
+            messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
         cards.push(messages.card(article.title, '', '', article.url, buttons));
     });
@@ -65,8 +63,27 @@ const handleSocialNetworks = () => {
     return messages.carousel(cards);
 };
 
+/*
+ * Returns a response to the SHARE event
+ */
+const handleShare = (title, url) => {
+    let cards = [];
+
+    cards.push(messages.card(title, config.FB_LOGO_URL, '', '', [
+        messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
+    ]));
+    cards.push(messages.card(title, config.TW_LOGO_URL, '', '', [
+        messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
+    ]));
+    cards.push(messages.card(title, config.LI_LOGO_URL, '', '', [
+        messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url)),
+    ]));
+    return messages.carousel(cards);
+};
+
 module.exports = {
     handleGetStarted,
     handleFeed,
-    handleSocialNetworks
+    handleSocialNetworks,
+    handleShare
 }

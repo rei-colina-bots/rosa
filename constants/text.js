@@ -12,6 +12,7 @@ module.exports = {
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',
+    SHARE: 'Share',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗞 News Feeds',
     MENU_TECH: '👨🏻‍💻 Hacker News',
