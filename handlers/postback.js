@@ -89,6 +89,10 @@ const handleShare = (article) => {
     cards.push(messages.card(article.title, config.GL_LOGO_URL, '', shareLink, [
         messages.webURLButton(text.SHARE_ON_GL, shareLink),
     ]));
+    shareLink = utils.getShareLink('hs', article.title, article.url);
+    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_HS, shareLink),
+    ]));
     return messages.carousel(cards);
 };
 
