@@ -13,7 +13,7 @@ module.exports = {
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',
     SHARE_ON_GL: 'Share on Google+',
-    SHARE_ON_HS: 'Share or Schedule with Hootsuite',
+    SHARE_ON_HS: 'Share or Schedule',
     SHARE: 'Share',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗞 News Feeds',
