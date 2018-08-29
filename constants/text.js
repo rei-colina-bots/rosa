@@ -28,6 +28,7 @@ module.exports = {
     FACEBOOK: 'Facebook',
     LINKEDIN: 'LinkedIn',
     GOOGLEPLUS: 'Google+',
+    INSTAGRAM: 'Instagram',
     SIGN_IN: 'Sign In & View',
     COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼'
 }

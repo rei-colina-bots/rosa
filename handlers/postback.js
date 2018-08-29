@@ -64,6 +64,9 @@ const handleSocialNetworks = () => {
     cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
+    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', config.IG, [
+        messages.webURLButton(text.SIGN_IN, config.IG),
+    ]));
     cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', config.GL, [
         messages.webURLButton(text.SIGN_IN, config.GL),
     ]));
