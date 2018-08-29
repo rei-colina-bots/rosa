@@ -27,22 +27,24 @@ const handleFeed = async (feedType) => {
     let feed = [];
     let cards = [];
     let buttons = [];
+    let image = ''
 
     if (feedType === events.TOPIC_TECH) {
         feed = await articles.getTech();
+        image = config.HN_LOGO_URL;
     } else if (feedType === events.TOPIC_REUTERS) {
         feed = await articles.getFromRssFeed(config.RSS_REUTERS);
+        image = config.REUTERS_LOGO_URL;
     } else if (feedType === events.TOPIC_ENT_LEAD) {
         feed = await articles.getFromRssFeed(config.RSS_ENT_LEAD);
+        image = config.ENT_LOGO_URL;
     }
 
     feed.forEach((article) => {
         buttons = [
-            messages.webURLButton(text.SHARE_ON_FB, utils.getShareLink('fb', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_TW, utils.getShareLink('tw', article.title, article.url)),
-            messages.webURLButton(text.SHARE_ON_LI, utils.getShareLink('li', article.title, article.url))
+            messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, '', '', article.url, buttons));
+        cards.push(messages.card(article.title, image, '', article.url, buttons));
     });
     return messages.carousel(cards);
 };
@@ -62,11 +64,48 @@ const handleSocialNetworks = () => {
     cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
+    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', config.IG, [
+        messages.webURLButton(text.SIGN_IN, config.IG),
+    ]));
+    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', config.GL, [
+        messages.webURLButton(text.SIGN_IN, config.GL),
+    ]));
+    return messages.carousel(cards);
+};
+
+/*
+ * Returns a response to the SHARE event
+ */
+const handleShare = (article) => {
+    let cards = [];
+    let shareLink = '';
+
+    shareLink = utils.getShareLink('fb', article.title, article.url);
+    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_FB, shareLink),
+    ]));
+    shareLink = utils.getShareLink('tw', article.title, article.url);
+    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_TW, shareLink),
+    ]));
+    shareLink = utils.getShareLink('li', article.title, article.url);
+    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_LI, shareLink),
+    ]));
+    shareLink = utils.getShareLink('gl', article.title, article.url);
+    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_GL, shareLink),
+    ]));
+    shareLink = utils.getShareLink('hs', article.title, article.url);
+    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_HS, shareLink),
+    ]));
     return messages.carousel(cards);
 };
 
 module.exports = {
     handleGetStarted,
     handleFeed,
-    handleSocialNetworks
+    handleSocialNetworks,
+    handleShare
 }

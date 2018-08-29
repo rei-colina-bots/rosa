@@ -116,8 +116,9 @@ async function  handlePostback(sender_psid, received_postback) {
     // Start typing
     api.sendAction(sender_psid, events.MARK_SEEN);
 
-    // Get the payload for the postback
+    // Get the payload and title for the postback
     let payload = received_postback.payload;
+    let title = received_postback.title;
   
     // Set the response based on the postback payload
     api.sendAction(sender_psid, events.TYPING_ON);
@@ -131,6 +132,8 @@ async function  handlePostback(sender_psid, received_postback) {
         response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
         response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
+    } else if (title ===  text.SHARE) {
+        response = postback.handleShare(JSON.parse(payload));
     } else {
         response = messages.text(text.COMING_SOON);
     }
