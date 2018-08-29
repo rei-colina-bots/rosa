@@ -12,6 +12,7 @@ module.exports = {
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',
+    SHARE_ON_GL: 'Share on Google+',
     SHARE: 'Share',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗞 News Feeds',
@@ -25,6 +26,7 @@ module.exports = {
     TWITTER: 'Twitter',
     FACEBOOK: 'Facebook',
     LINKEDIN: 'LinkedIn',
+    GOOGLEPLUS: 'Google+',
     SIGN_IN: 'Sign In & View',
     COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼'
 }

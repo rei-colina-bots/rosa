@@ -18,6 +18,8 @@ const getShareLink = (network, title, url) => {
         return config.TW_SHARE_URL + title + '%20' + url + '&source=webclient';
     } else if (network === 'li') {
         return config.LI_SHARE_URL + url + '&title=' + title;
+    } else if (network === 'gl') {
+        return config.GL_SHARE_URL + url
     } else {
         return '';
     }

@@ -60,6 +60,9 @@ const handleSocialNetworks = () => {
     cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
+    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', config.GL, [
+        messages.webURLButton(text.SIGN_IN, config.GL),
+    ]));
     return messages.carousel(cards);
 };
 
@@ -81,6 +84,10 @@ const handleShare = (article) => {
     shareLink = utils.getShareLink('li', article.title, article.url);
     cards.push(messages.card(article.title, config.LI_LOGO_URL, '', shareLink, [
         messages.webURLButton(text.SHARE_ON_LI, shareLink),
+    ]));
+    shareLink = utils.getShareLink('gl', article.title, article.url);
+    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', shareLink, [
+        messages.webURLButton(text.SHARE_ON_GL, shareLink),
     ]));
     return messages.carousel(cards);
 };
