@@ -35,8 +35,10 @@ const handleGetStarted2 = () => {
  * Returns a response to the GET_STARTED_3 event
  */
 const handleGetStarted3 = () => {
-    let buttons = [messages.postbackButton(text.SHOW_ME_NEWS,
-        events.TOPIC_REUTERS)];
+    let buttons = [
+        messages.postbackButton(text.SHOW_ME_NEWS, events.TOPIC_REUTERS),
+        messages.postbackButton(text.SEE_SOCIAL_NETWORKS, events.MENU_SOCIAL)
+    ];
     return messages.buttonCard(text.GET_STARTED_3, buttons);
 };
 
@@ -102,23 +104,23 @@ const handleShare = (article) => {
     let shareLink = '';
 
     shareLink = utils.getShareLink('fb', article.title, article.url);
-    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_FB, shareLink),
     ]));
     shareLink = utils.getShareLink('tw', article.title, article.url);
-    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_TW, shareLink),
     ]));
     shareLink = utils.getShareLink('li', article.title, article.url);
-    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_LI, shareLink),
     ]));
     shareLink = utils.getShareLink('gl', article.title, article.url);
-    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_GL, shareLink),
     ]));
     shareLink = utils.getShareLink('hs', article.title, article.url);
-    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_HS, shareLink),
     ]));
     return messages.carousel(cards);

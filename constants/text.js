@@ -30,6 +30,7 @@ module.exports = {
     MENU_HELP: '❓ Help',
     WHAT_ELSE: 'Ok, what else?',
     SHOW_ME_NEWS: 'Show me some news!',
+    SEE_SOCIAL_NETWORKS: 'Check out the social networks',
     TWITTER: 'Twitter',
     FACEBOOK: 'Facebook',
     LINKEDIN: 'LinkedIn',
