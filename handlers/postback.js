@@ -62,9 +62,10 @@ const handleFeed = async (feedType) => {
 
     feed.forEach((article) => {
         buttons = [
+            messages.webURLButton(text.VIEW, article.url),
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, image, '', article.url, buttons));
+        cards.push(messages.card(article.title, image, '', '', buttons));
     });
     return messages.carousel(cards);
 };
@@ -75,19 +76,19 @@ const handleFeed = async (feedType) => {
 const handleSocialNetworks = () => {
     let cards = [];
 
-    cards.push(messages.card(text.FACEBOOK, config.FB_LOGO_URL, '', config.FB, [
+    cards.push(messages.card(text.FACEBOOK, config.FB_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.FB),
     ]));
-    cards.push(messages.card(text.TWITTER, config.TW_LOGO_URL, '', config.TW, [
+    cards.push(messages.card(text.TWITTER, config.TW_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.TW),
     ]));
-    cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
+    cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
-    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', config.IG, [
+    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.IG),
     ]));
-    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', config.GL, [
+    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.GL),
     ]));
     return messages.carousel(cards);

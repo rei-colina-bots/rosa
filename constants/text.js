@@ -8,8 +8,8 @@
 
 module.exports = {
     ECHO: 'You sent the message: "${received_message.text}".',
-    GET_STARTED: "Hi, {{user_first_name}} 👋🏼 Let's get you started! There is a menu 💬 down below 👇🏼 where you can: \n - Get the latest articles from popular news feeds 🗞 \n - Take a look at your own social networks 📱",
-    GET_STARTED_2: "The first time you access any of your social networks or any external service, you will be asked to sign in into that service. But don't worry, this should only be done once 👍🏼",
+    GET_STARTED: "Hi 👋🏼 Let's get you started! There is a menu 💬 down below 👇🏼 where you can: \n - Get the latest articles from popular news feeds 🗞 \n - Take a look at your own social networks 📱",
+    GET_STARTED_2: "The first time you access any of your social networks or any external service, you will be asked to sign into that service. But don't worry, this should only be done once 👍🏼",
     GET_STARTED_3: "Let's give it a try! 👌🏼",
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
@@ -17,6 +17,7 @@ module.exports = {
     SHARE_ON_GL: 'Share on Google+',
     SHARE_ON_HS: 'Share or Schedule',
     SHARE: 'Share',
+    VIEW: 'View on Web',
     MENU: '💬 Menu',
     MENU_TOPICS: '🗞 News Feeds',
     MENU_TECH: '👨🏻‍💻 Hacker News',
