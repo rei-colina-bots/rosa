@@ -126,6 +126,8 @@ async function  handlePostback(sender_psid, received_postback) {
       response = postback.handleGetStarted();
     } else if (payload === events.GET_STARTED_2) {
         response = postback.handleGetStarted2();
+    } else if (payload === events.GET_STARTED_3) {
+      response = postback.handleGetStarted3();
     } else if((payload === events.TOPIC_TECH)) {
         response = await postback.handleFeed(events.TOPIC_TECH);
     } else if(payload === events.MENU_SOCIAL) {

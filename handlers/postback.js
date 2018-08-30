@@ -17,7 +17,8 @@ const articles = require("../helpers/articles.js");
  * Returns a response to the GET_STARTED event
  */
 const handleGetStarted = () => {
-    let buttons = [messages.postbackButton(text.WHAT_ELSE, events.GET_STARTED_2)];
+    let buttons = [messages.postbackButton(text.WHAT_ELSE,
+        events.GET_STARTED_2)];
     return messages.buttonCard(text.GET_STARTED, buttons);
 };
 
@@ -25,7 +26,18 @@ const handleGetStarted = () => {
  * Returns a response to the GET_STARTED_2 event
  */
 const handleGetStarted2 = () => {
-    return messages.text(text.GET_STARTED_2);
+    let buttons = [messages.postbackButton(text.WHAT_ELSE,
+        events.GET_STARTED_3)];
+    return messages.buttonCard(text.GET_STARTED_2, buttons);
+};
+
+/*
+ * Returns a response to the GET_STARTED_3 event
+ */
+const handleGetStarted3 = () => {
+    let buttons = [messages.postbackButton(text.SHOW_ME_NEWS,
+        events.TOPIC_REUTERS)];
+    return messages.buttonCard(text.GET_STARTED_3, buttons);
 };
 
 /*
@@ -114,6 +126,7 @@ const handleShare = (article) => {
 module.exports = {
     handleGetStarted,
     handleGetStarted2,
+    handleGetStarted3,
     handleFeed,
     handleSocialNetworks,
     handleShare
