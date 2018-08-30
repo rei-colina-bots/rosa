@@ -33,17 +33,20 @@ const webURLButton = (title, url) => {
  * Message that represents a card
  */
 const card = (title, image_url, subtitle, url, buttons) => {
-    return {
+    let template = {
         title: title,
         image_url: image_url,
         subtitle: subtitle,
-        default_action: {
+        buttons: buttons
+    }
+    if (url) {
+        template.default_action = {
             type: 'web_url',
             url: url,
             webview_height_ratio: 'tall',
-        },
-        buttons: buttons
+        }
     }
+    return template;
 };
 
 /*
