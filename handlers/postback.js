@@ -17,7 +17,29 @@ const articles = require("../helpers/articles.js");
  * Returns a response to the GET_STARTED event
  */
 const handleGetStarted = () => {
-    return messages.text(text.GET_STARTED);
+    let buttons = [messages.postbackButton(text.WHAT_ELSE,
+        events.GET_STARTED_2)];
+    return messages.buttonCard(text.GET_STARTED, buttons);
+};
+
+/*
+ * Returns a response to the GET_STARTED_2 event
+ */
+const handleGetStarted2 = () => {
+    let buttons = [messages.postbackButton(text.WHAT_ELSE,
+        events.GET_STARTED_3)];
+    return messages.buttonCard(text.GET_STARTED_2, buttons);
+};
+
+/*
+ * Returns a response to the GET_STARTED_3 event
+ */
+const handleGetStarted3 = () => {
+    let buttons = [
+        messages.postbackButton(text.SHOW_ME_NEWS, events.TOPIC_REUTERS),
+        messages.postbackButton(text.SEE_SOCIAL_NETWORKS, events.MENU_SOCIAL)
+    ];
+    return messages.buttonCard(text.GET_STARTED_3, buttons);
 };
 
 /*
@@ -42,9 +64,10 @@ const handleFeed = async (feedType) => {
 
     feed.forEach((article) => {
         buttons = [
+            messages.webURLButton(text.VIEW, article.url),
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, image, '', article.url, buttons));
+        cards.push(messages.card(article.title, image, '', '', buttons));
     });
     return messages.carousel(cards);
 };
@@ -55,19 +78,19 @@ const handleFeed = async (feedType) => {
 const handleSocialNetworks = () => {
     let cards = [];
 
-    cards.push(messages.card(text.FACEBOOK, config.FB_LOGO_URL, '', config.FB, [
+    cards.push(messages.card(text.FACEBOOK, config.FB_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.FB),
     ]));
-    cards.push(messages.card(text.TWITTER, config.TW_LOGO_URL, '', config.TW, [
+    cards.push(messages.card(text.TWITTER, config.TW_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.TW),
     ]));
-    cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', config.LI, [
+    cards.push(messages.card(text.LINKEDIN, config.LI_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.LI),
     ]));
-    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', config.IG, [
+    cards.push(messages.card(text.INSTAGRAM, config.IG_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.IG),
     ]));
-    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', config.GL, [
+    cards.push(messages.card(text.GOOGLEPLUS, config.GL_LOGO_URL, '', '', [
         messages.webURLButton(text.SIGN_IN, config.GL),
     ]));
     return messages.carousel(cards);
@@ -81,23 +104,23 @@ const handleShare = (article) => {
     let shareLink = '';
 
     shareLink = utils.getShareLink('fb', article.title, article.url);
-    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.FB_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_FB, shareLink),
     ]));
     shareLink = utils.getShareLink('tw', article.title, article.url);
-    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.TW_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_TW, shareLink),
     ]));
     shareLink = utils.getShareLink('li', article.title, article.url);
-    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.LI_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_LI, shareLink),
     ]));
     shareLink = utils.getShareLink('gl', article.title, article.url);
-    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.GL_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_GL, shareLink),
     ]));
     shareLink = utils.getShareLink('hs', article.title, article.url);
-    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', shareLink, [
+    cards.push(messages.card(article.title, config.HS_LOGO_URL, '', '', [
         messages.webURLButton(text.SHARE_ON_HS, shareLink),
     ]));
     return messages.carousel(cards);
@@ -105,6 +128,8 @@ const handleShare = (article) => {
 
 module.exports = {
     handleGetStarted,
+    handleGetStarted2,
+    handleGetStarted3,
     handleFeed,
     handleSocialNetworks,
     handleShare
