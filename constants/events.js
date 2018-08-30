@@ -15,6 +15,7 @@ module.exports = {
     TOPIC_WIRED: 'topic-wired',
     MENU_SOCIAL: 'social-networks',
     GET_STARTED: 'get-started',
+    GET_STARTED_2: 'get-started-2',
     MARK_SEEN: 'mark_seen',
     TYPING_ON: 'typing_on',
     TYPING_OFF: 'typing_off'

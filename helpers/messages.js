@@ -62,6 +62,22 @@ const carousel = (cards) => {
 };
 
 /*
+ * Message that represents a button card template
+ */
+const buttonCard = (message, buttons) => {
+    return {
+        attachment:{
+          type: 'template',
+          payload: {
+            template_type: 'button',
+            text: message,
+            buttons: buttons
+          }
+        }
+    }
+};
+
+/*
  * Message with basic text
  */
 const text = (message) => {
@@ -99,6 +115,7 @@ module.exports = {
     carousel,
     text,
     quickReply,
-    quickReplies
+    quickReplies,
+    buttonCard
 }
 
