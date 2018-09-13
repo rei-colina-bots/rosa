@@ -21,7 +21,7 @@ module.exports = {
     HS_LOGO_URL: 'http://keystoneresources.com/wp-content/uploads/2016/07/hootsuite.jpg',
     HN_LOGO_URL: 'https://prod-marketing-greenhouse.global.ssl.fastly.net/blog-assets/hackernews.png?mtime=20160407112052',
     ENT_LOGO_URL: 'https://assets.entrepreneur.com/content/3x2/2000/20160408155709-default-hero-entrepreneur.png',
-    REUTERS_LOGO_URL: 'http://www.isportconnect.com/wp-content/uploads/2017/05/Reuters-Logo.png',
+    REUTERS_LOGO_URL: 'https://i0.wp.com/www.verite.org/wp-content/uploads/2016/12/Reuters_logo.jpg',
     FB_SHARE_URL: 'https://www.facebook.com/sharer/sharer.php?u=',
     TW_SHARE_URL: 'https://twitter.com/intent/tweet?text=',
     LI_SHARE_URL: 'https://www.linkedin.com/shareArticle?mini=true&url=',
