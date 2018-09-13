@@ -78,11 +78,13 @@ const handleFeed = async (feedType) => {
  * Returns a response to the SAVED_ITEMS event
  */
 const handleSavedArticles = () => {
+    let cards = [];
     let buttons = [
         messages.webURLButton(text.GO_TO_POCKET_BUTTON, config.POCKET_URL),
     ];
-    return messages.card(text.GO_TO_POCKET_TITLE, config.POCKET_LOGO_URL,
-        '', '', buttons);
+    cards.push(messages.card(text.GO_TO_POCKET_TITLE, config.POCKET_LOGO_URL,
+        '', '', buttons));
+    return messages.carousel(cards);
 };
 
 /*
