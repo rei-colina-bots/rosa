@@ -36,6 +36,10 @@ const setup = (res) => {
                                 events.TOPIC_TECH),
                             messages.postbackButton(text.MENU_ENT_LEAD,
                                 events.TOPIC_ENT_LEAD),
+                            messages.postbackButton(text.MENU_COIN_TELEGRAPH,
+                                events.TOPIC_COIN_TELEGRAPH),
+                            messages.postbackButton(text.MENU_BBC,
+                                events.TOPIC_BBC),
                             messages.postbackButton(text.MENU_REUTERS,
                                 events.TOPIC_REUTERS)
                         ]

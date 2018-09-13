@@ -60,6 +60,12 @@ const handleFeed = async (feedType) => {
     } else if (feedType === events.TOPIC_ENT_LEAD) {
         feed = await articles.getFromRssFeed(config.RSS_ENT_LEAD);
         image = config.ENT_LOGO_URL;
+    } else if (feedType === events.TOPIC_BBC) {
+        feed = await articles.getFromRssFeed(config.RSS_BBC);
+        image = config.BBC_LOGO_URL;
+    } else if (feedType === events.TOPIC_COIN_TELEGRAPH) {
+        feed = await articles.getFromRssFeed(config.RSS_COIN_TELEGRAPH);
+        image = config.COIN_TELEGRAPH_LOGO_URL;
     }
 
     feed.forEach((article) => {

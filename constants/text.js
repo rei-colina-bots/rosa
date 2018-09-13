@@ -30,6 +30,7 @@ module.exports = {
     MENU_HBR: '💼 Harvard Business Review',
     MENU_ENT_LEAD: '💼 Entrepreneur - Leadership',
     MENU_WIRED: '🔌 Wired',
+    MENU_COIN_TELEGRAPH: '🏦 Cointelegraph',
     MENU_SOCIAL: '📱 Social Networks',
     MENU_HELP: '❓ Help',
     WHAT_ELSE: 'Ok, what else?',
