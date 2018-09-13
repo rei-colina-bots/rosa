@@ -53,9 +53,8 @@ const setup = (res) => {
           ]
     };
     api.callSendAPI(request_body, 'messenger_profile');
-    if (res) {
-        res.status(200).send('SETUP_COMPLETED');
-    }
+
+    res.status(200).send('SETUP_COMPLETED');
 };
 
 module.exports = {
