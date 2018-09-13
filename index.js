@@ -12,6 +12,9 @@ const
   postback = require("./handlers/postback.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
+// Initialize the bot
+bot.setup();
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -136,6 +139,8 @@ async function  handlePostback(sender_psid, received_postback) {
         response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
         response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
+    } else if (payload === events.MENU_SAVED_ITEMS) {
+        response = postback.handleSavedArticles();
     } else if (title ===  text.SHARE) {
         response = postback.handleShare(JSON.parse(payload));
     } else {

@@ -27,8 +27,15 @@ const getShareLink = (network, title, url) => {
     }
 };
 
+/*
+ * Generates a social media share link
+ */
+const getSaveLink = (url) => {
+    return config.POCKET_SAVE_URL + url;
+};
 
 module.exports = {
-    getShareLink
+    getShareLink,
+    getSaveLink
 }
 
