@@ -22,6 +22,8 @@ module.exports = {
     HN_LOGO_URL: 'https://prod-marketing-greenhouse.global.ssl.fastly.net/blog-assets/hackernews.png?mtime=20160407112052',
     ENT_LOGO_URL: 'https://assets.entrepreneur.com/content/3x2/2000/20160408155709-default-hero-entrepreneur.png',
     REUTERS_LOGO_URL: 'https://i0.wp.com/www.verite.org/wp-content/uploads/2016/12/Reuters_logo.jpg',
+    COIN_TELEGRAPH_LOGO_URL: 'https://cointelegraph.com/assets/img/share.png',
+    BBC_LOGO_URL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/BBC_logo_new.svg/2000px-BBC_logo_new.svg.png',
     FB_SHARE_URL: 'https://www.facebook.com/sharer/sharer.php?u=',
     TW_SHARE_URL: 'https://twitter.com/intent/tweet?text=',
     LI_SHARE_URL: 'https://www.linkedin.com/shareArticle?mini=true&url=',
@@ -36,6 +38,7 @@ module.exports = {
     RSS_WIRED: 'https://www.wired.com/feed/rss',
     RSS_HBR: 'https://flipboard.com/topic/leadership.rss',
     RSS_INC_LEAD: 'https://www.inc.com/rss/lead',
-    RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss'
+    RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss',
+    RSS_COIN_TELEGRAPH: 'https://cointelegraph.com/editors_pick_rss'
 }
 

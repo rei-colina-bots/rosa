@@ -9,6 +9,7 @@
 module.exports = {
     TOPIC_TECH: 'topic-tech',
     TOPIC_BBC: 'topic-bbc',
+    TOPIC_COIN_TELEGRAPH: 'topic-coin-telegraph',
     TOPIC_REUTERS: 'topic-reuters',
     TOPIC_HBR: 'topic-hbr',
     TOPIC_ENT_LEAD: 'topic-inc-lead',
