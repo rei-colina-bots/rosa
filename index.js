@@ -136,6 +136,8 @@ async function  handlePostback(sender_psid, received_postback) {
         response = await postback.handleFeed(events.TOPIC_REUTERS);
     } else if(payload === events.TOPIC_ENT_LEAD) {
         response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
+    } else if (payload === events.MENU_SAVED_ITEMS) {
+        response = postback.handleSavedArticles();
     } else if (title ===  text.SHARE) {
         response = postback.handleShare(JSON.parse(payload));
     } else {

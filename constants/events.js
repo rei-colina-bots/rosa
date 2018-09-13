@@ -19,6 +19,7 @@ module.exports = {
     GET_STARTED_3: 'get-started-3',
     MARK_SEEN: 'mark_seen',
     TYPING_ON: 'typing_on',
-    TYPING_OFF: 'typing_off'
+    TYPING_OFF: 'typing_off',
+    MENU_SAVED_ITEMS: 'saved-items'
 }
 

@@ -42,6 +42,8 @@ const setup = (res) => {
                     },
                     messages.postbackButton(text.MENU_SOCIAL,
                         events.MENU_SOCIAL),
+                    messages.postbackButton(text.MENU_SAVED_ITEMS,
+                        events.MENU_SAVED_ITEMS),
                     messages.postbackButton(text.MENU_HELP,
                         events.GET_STARTED)
                   ]
@@ -51,6 +53,7 @@ const setup = (res) => {
           ]
     };
     api.callSendAPI(request_body, 'messenger_profile');
+
     res.status(200).send('SETUP_COMPLETED');
 };
 

@@ -65,10 +65,25 @@ const handleFeed = async (feedType) => {
     feed.forEach((article) => {
         buttons = [
             messages.webURLButton(text.VIEW, article.url),
+            messages.webURLButton(text.SAVE_FOR_LATER,
+                utils.getSaveLink(article.url)),
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
         cards.push(messages.card(article.title, image, '', '', buttons));
     });
+    return messages.carousel(cards);
+};
+
+/*
+ * Returns a response to the SAVED_ITEMS event
+ */
+const handleSavedArticles = () => {
+    let cards = [];
+    let buttons = [
+        messages.webURLButton(text.GO_TO_POCKET_BUTTON, config.POCKET_URL),
+    ];
+    cards.push(messages.card(text.GO_TO_POCKET_TITLE, config.POCKET_LOGO_URL,
+        '', '', buttons));
     return messages.carousel(cards);
 };
 
@@ -132,5 +147,6 @@ module.exports = {
     handleGetStarted3,
     handleFeed,
     handleSocialNetworks,
-    handleShare
+    handleShare,
+    handleSavedArticles
 }
