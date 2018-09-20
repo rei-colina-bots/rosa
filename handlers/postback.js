@@ -106,7 +106,7 @@ const handlePaidServices = (sender_psid) => {
         'offline', sender_psid);
     
     let amplify_button = messages.loginButton(hootsuite_auth_url);
-    if (users.get(sender_psid).amplifyToken) {
+    if (users.get(sender_psid) && users.get(sender_psid).amplifyToken) {
         amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com");
     }
 
