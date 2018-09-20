@@ -21,6 +21,7 @@ module.exports = {
     MARK_SEEN: 'mark_seen',
     TYPING_ON: 'typing_on',
     TYPING_OFF: 'typing_off',
-    MENU_SAVED_ITEMS: 'saved-items'
+    MENU_SAVED_ITEMS: 'saved-items',
+    MENU_PAID_SERVICES: 'paid-services'
 }
 

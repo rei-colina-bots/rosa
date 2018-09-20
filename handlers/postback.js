@@ -94,6 +94,19 @@ const handleSavedArticles = () => {
 };
 
 /*
+ * Returns a response to the PAID_SERVICES event
+ */
+const handlePaidServices = () => {
+    let cards = [];
+    let buttons = [
+        messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com"),
+    ];
+    cards.push(messages.card(text.GO_TO_AMPLIFY_TITLE, config.AMPLIFY_LOGO_URL,
+        text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
+    return messages.carousel(cards);
+};
+
+/*
  * Returns a response to the SOCIAL_NETWORKS event
  */
 const handleSocialNetworks = () => {
@@ -154,5 +167,6 @@ module.exports = {
     handleFeed,
     handleSocialNetworks,
     handleShare,
-    handleSavedArticles
+    handleSavedArticles,
+    handlePaidServices
 }

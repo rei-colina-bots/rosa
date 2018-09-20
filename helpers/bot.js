@@ -48,6 +48,8 @@ const setup = (res) => {
                         events.MENU_SOCIAL),
                     messages.postbackButton(text.MENU_SAVED_ITEMS,
                         events.MENU_SAVED_ITEMS),
+                    messages.postbackButton(text.MENU_PAID_SERVICES,
+                        events.MENU_PAID_SERVICES),
                     messages.postbackButton(text.MENU_HELP,
                         events.GET_STARTED)
                   ]
