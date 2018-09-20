@@ -101,12 +101,10 @@ const handleSavedArticles = () => {
  */
 const handlePaidServices = (sender_psid) => {
     let cards = [];
-    let hootsuite_auth_url = utils.getAuthLink(config.API_AMPLIFY_BASE_URL,
+    let hootsuite_auth_url = utils.getAuthLink(config.API_HOOTSUITE_BASE_URL,
         process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
         'offline', sender_psid);
-    
-        console.log(hootsuite_auth_url);
-    
+
     let amplify_button = messages.loginButton(hootsuite_auth_url);
     if (users.get(sender_psid) && users.get(sender_psid).amplifyToken) {
         amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com");

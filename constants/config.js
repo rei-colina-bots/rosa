@@ -42,6 +42,7 @@ module.exports = {
     RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss',
     RSS_COIN_TELEGRAPH: 'https://cointelegraph.com/editors_pick_rss',
     API_AMPLIFY_BASE_URL: 'https://platform.hootsuite.com/amplify/',
+    API_HOOTSUITE_BASE_URL: 'https://platform.hootsuite.com/',
     API_AMPLIFY_AUTH_REDIRECT_URL: 'https://rosa-bot.herokuapp.com/oauth2/callback'
 }
 
