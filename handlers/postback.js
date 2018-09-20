@@ -12,6 +12,9 @@ const config = require("../constants/config.js");
 const events = require("../constants/events.js");
 const utils = require("../helpers/utils.js");
 const articles = require("../helpers/articles.js");
+const dataStore = require("../data/storage.js");
+
+let users = new dataStore('users');
 
 /*
  * Returns a response to the GET_STARTED event
@@ -98,6 +101,7 @@ const handleSavedArticles = () => {
  */
 const handlePaidServices = () => {
     let cards = [];
+
     let buttons = [
         messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com"),
     ];
