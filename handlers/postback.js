@@ -102,7 +102,7 @@ const handleSavedArticles = () => {
 const handlePaidServices = (sender_psid) => {
     let cards = [];
     let hootsuite_auth_url = utils.getAuthLink(config.API_AMPLIFY_BASE_URL,
-        process.env.HOOTSUITE_CLIENT_ID, 'https://www.google.com',
+        process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
         'offline', sender_psid);
     
     let amplify_button = messages.loginButton(hootsuite_auth_url);
