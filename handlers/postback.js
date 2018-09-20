@@ -99,12 +99,21 @@ const handleSavedArticles = () => {
 /*
  * Returns a response to the PAID_SERVICES event
  */
-const handlePaidServices = () => {
+const handlePaidServices = (sender_psid) => {
     let cards = [];
+    let hootsuite_auth_url = utils.getAuthLink(config.API_AMPLIFY_BASE_URL,
+        process.env.HOOTSUITE_CLIENT_ID, 'https://www.google.com',
+        'offline', sender_psid);
+    
+    let amplify_button = messages.loginButton(hootsuite_auth_url);
+    if (users.get(sender_psid).amplifyToken) {
+        amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com");
+    }
 
     let buttons = [
-        messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com"),
+        amplify_button,
     ];
+
     cards.push(messages.card(text.GO_TO_AMPLIFY_TITLE, config.AMPLIFY_LOGO_URL,
         text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
     return messages.carousel(cards);

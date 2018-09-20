@@ -40,6 +40,8 @@ module.exports = {
     RSS_HBR: 'https://flipboard.com/topic/leadership.rss',
     RSS_INC_LEAD: 'https://www.inc.com/rss/lead',
     RSS_ENT_LEAD: 'https://www.entrepreneur.com/topic/leadership.rss',
-    RSS_COIN_TELEGRAPH: 'https://cointelegraph.com/editors_pick_rss'
+    RSS_COIN_TELEGRAPH: 'https://cointelegraph.com/editors_pick_rss',
+    API_AMPLIFY_BASE_URL: 'https://platform.hootsuite.com/amplify/',
+    API_AMPLIFY_AUTH_REDIRECT_URL: 'http://google.com'
 }
 

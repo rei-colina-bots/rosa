@@ -30,6 +30,16 @@ const webURLButton = (title, url) => {
 };
 
 /*
+ * Button that links to a web URL
+ */
+const loginButton = (url) => {
+    return {
+        type: 'account_link',
+        url: url
+    };
+};
+
+/*
  * Message that represents a card
  */
 const card = (title, image_url, subtitle, url, buttons) => {
@@ -119,6 +129,7 @@ module.exports = {
     text,
     quickReply,
     quickReplies,
-    buttonCard
+    buttonCard,
+    loginButton
 }
 

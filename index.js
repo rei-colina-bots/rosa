@@ -143,7 +143,7 @@ async function  handlePostback(sender_psid, received_postback) {
     } else if (payload === events.MENU_SAVED_ITEMS) {
         response = postback.handleSavedArticles();
     } else if (payload === events.MENU_PAID_SERVICES) {
-        response = postback.handlePaidServices();
+        response = postback.handlePaidServices(sender_psid);
     } else if (title ===  text.SHARE) {
         response = postback.handleShare(JSON.parse(payload));
     } else {
