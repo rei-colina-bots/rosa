@@ -12,7 +12,7 @@ module.exports = {
     LI: 'https://www.linkedin.com',
     GL: 'https://plus.google.com',
     IG: 'https://www.instagram.com',
-    AMPLIFY_LOGO_URL: 'https://apprecs.org/ios/images/app-icons/256/3e/1020324670.jpg',
+    AMPLIFY_LOGO_URL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZHBiizuithXkKr-FhWrFaPYHGLOE0xfkT7YFjTVdHkI8mXCeP',
     POCKET_LOGO_URL: 'https://i.pinimg.com/originals/08/45/3f/08453f5b483d728384f53cc57a278be3.png',
     FB_LOGO_URL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png',
     TW_LOGO_URL: 'https://pbs.twimg.com/profile_images/1013798240683266048/zRim1x6M_400x400.jpg',
