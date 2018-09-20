@@ -16,11 +16,12 @@ module.exports = class Storage {
         }
     }
 
-    get value(key) {
-      return memoryStorage[this.name][key];
+    get(key) {
+        return memoryStorage[this.name][key];
     }
 
-    set value(key, data) {
-        memoryStorage[this.name][key] = data;
+    set(key, value) {
+        memoryStorage[this.name][key] = value;
     }
+
 };
