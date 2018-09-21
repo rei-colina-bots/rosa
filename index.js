@@ -108,9 +108,7 @@ app.get('/oauth2/callback', (req, res) => {
 // Endpoint to log into Hootsuite Amplify
 app.get('/amplify/login', (req, res) => {
     let state = {
-        service: 'amplify',
         psid: req.query['psid'],
-        accountLinkingToken: req.query['account_linking_token'],
         redirectUri: req.query['redirect_uri']
     }
 
