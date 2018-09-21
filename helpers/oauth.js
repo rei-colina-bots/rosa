@@ -1,0 +1,35 @@
+"use strict";
+
+/*
+ * OAUTH
+ *
+ * Objects and methods to handle OAuth flows.
+ */
+
+/*
+ * Performs token exchange
+ */
+const getToken = (baseUrl, authCode, redirectUri) => {
+    postRequest(baseUrl, {
+        grant_type: 'authorization_code',
+        code: authCode,
+        redirect_uri: redirectUri
+    });
+};
+
+const postRequest = (baseUrl, payload) => {
+    request({
+        uri: base_url + '/oauth2/token',
+        method: 'POST',
+        json: payload
+    }, (err, res, body) => {
+        if (err) {
+            console.error('Unable to send message:' + err);
+        }
+        return body;
+    }); 
+};
+
+module.exports = {
+    getToken
+}

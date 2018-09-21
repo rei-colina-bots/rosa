@@ -7,6 +7,7 @@ const
   messages = require("./helpers/messages.js"),
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
+  oauth = require("./helpers/oauth.js"),
   utils = require("./helpers/utils.js"),
   text = require("./constants/text.js"),
   events = require("./constants/events.js"),
@@ -100,7 +101,8 @@ app.get('/oauth2/callback', (req, res) => {
     let authorizationCode = req.query['code'];
     let redirectUri = state.redirectUri + '&authorization_code=' + authorizationCode;
 
-    console.log(redirectUri);
+    handleAmplifyTokenExchange(authorizationCode,
+        config.API_AMPLIFY_AUTH_REDIRECT_URL, state.psid);
 
     res.redirect(redirectUri);
 });
@@ -118,6 +120,13 @@ app.get('/amplify/login', (req, res) => {
 
     res.redirect(hootsuite_auth_url);
 });
+
+// Handles OAuth Token Exchange
+async function handleAmplifyTokenExchange(authCode, redirectUri, psid) {
+    tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
+        authCode,redirectUri);
+    console.log(tokenData);
+}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
