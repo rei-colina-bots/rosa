@@ -116,8 +116,6 @@ app.get('/amplify/login', (req, res) => {
         process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
         'offline',  encodeURI(JSON.stringify(state)));
 
-    console.log(hootsuite_auth_url);
-
     res.redirect(hootsuite_auth_url);
 });
 
