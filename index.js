@@ -98,8 +98,11 @@ app.get('/setup', (req, res) => {
 app.get('/oauth2/callback', (req, res) => {
     let state = JSON.parse(req.query['state']);
     let authorizationCode = req.query['code'];
+    let redirectUri = state.redirectUri + '&authorization_code=' + authorizationCode;
 
-    res.redirect(state.redirectUri + '&authorization_code=' + authorizationCode);
+    console.log(redirectUri);
+
+    res.redirect(redirectUri);
 });
 
 // Endpoint to log into Hootsuite Amplify
@@ -114,6 +117,8 @@ app.get('/amplify/login', (req, res) => {
     let hootsuite_auth_url = utils.getAuthLink(config.API_HOOTSUITE_BASE_URL,
         process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
         'offline', JSON.stringify(state));
+
+    console.log(hootsuite_auth_url);
 
     res.redirect(hootsuite_auth_url);
 });
