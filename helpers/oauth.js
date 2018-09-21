@@ -6,6 +6,8 @@
  * Objects and methods to handle OAuth flows.
  */
 
+const request = require('request');
+
 /*
  * Performs token exchange
  */
