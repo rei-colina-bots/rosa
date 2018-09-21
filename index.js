@@ -94,6 +94,14 @@ app.get('/setup', (req, res) => {
     bot.setup(res);
 });
 
+// Callback URL for Oauth2
+app.get('/oauth2/callback', (req, res) => {
+    let state = JSON.parse(req.query['state']);
+    let authorizationCode = req.query['code'];
+
+    res.redirect(state.redirectUri + '&authorization_code=' + authorizationCode);
+});
+
 // Endpoint to log into Hootsuite Amplify
 app.get('/amplify/login', (req, res) => {
     let state = {
