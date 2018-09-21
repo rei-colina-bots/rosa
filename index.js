@@ -123,7 +123,7 @@ app.get('/amplify/login', (req, res) => {
 
 // Handles OAuth Token Exchange
 async function handleAmplifyTokenExchange(authCode, redirectUri, psid) {
-    tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
+    let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
         authCode,redirectUri);
     console.log(tokenData);
 }
