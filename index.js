@@ -7,8 +7,10 @@ const
   messages = require("./helpers/messages.js"),
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
+  utils = require("./helpers/utils.js"),
   text = require("./constants/text.js"),
   events = require("./constants/events.js"),
+  config = require("./constants/config.js"),
   postback = require("./handlers/postback.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
@@ -90,6 +92,15 @@ app.get('/webhook', (req, res) => {
 // Endpoint to set up the bot's main configuration
 app.get('/setup', (req, res) => {
     bot.setup(res);
+});
+
+// Endpoint to log into Hootsuite Amplify
+app.get('/amplify/login', (req, res) => {
+    let sender_psid = req.query['psid'];
+    let hootsuite_auth_url = utils.getAuthLink(config.API_HOOTSUITE_BASE_URL,
+        process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
+        'offline', sender_psid);
+    res.redirect(hootsuite_auth_url);
 });
 
 // Handles messages events
