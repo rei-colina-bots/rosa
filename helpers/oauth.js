@@ -21,12 +21,12 @@ const getToken = (baseUrl, authCode, redirectUri) => {
 
 const postRequest = (baseUrl, payload) => {
     request({
-        uri: base_url + '/oauth2/token',
+        uri: baseUrl + '/oauth2/token',
         method: 'POST',
         json: payload
     }, (err, res, body) => {
         if (err) {
-            console.error('Unable to send message:' + err);
+            console.error('Unable to send OAuth message:' + err);
         }
         return body;
     }); 
