@@ -96,10 +96,17 @@ app.get('/setup', (req, res) => {
 
 // Endpoint to log into Hootsuite Amplify
 app.get('/amplify/login', (req, res) => {
-    let sender_psid = req.query['psid'];
+    let state = {
+        service: 'amplify',
+        psid: req.query['psid'],
+        accountLinkingToken: req.query['account_linking_token'],
+        redirectUri: req.query['redirect_uri']
+    }
+
     let hootsuite_auth_url = utils.getAuthLink(config.API_HOOTSUITE_BASE_URL,
         process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
-        'offline', sender_psid);
+        'offline', JSON.stringify(state));
+
     res.redirect(hootsuite_auth_url);
 });
 
