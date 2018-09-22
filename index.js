@@ -46,6 +46,8 @@ app.post('/webhook', (req, res) => {
             handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
+        } else if (webhook_event.account_linking) {
+            handleAccountLinking(sender_psid, webhook_event.account_linking);
         }
       });
   
@@ -101,9 +103,6 @@ app.get('/oauth2/callback', (req, res) => {
     let authorizationCode = req.query['code'];
     let redirectUri = state.redirectUri + '&authorization_code=' + authorizationCode;
 
-    handleAmplifyTokenExchange(authorizationCode,
-        config.API_AMPLIFY_AUTH_REDIRECT_URL, state.psid);
-
     res.redirect(redirectUri);
 });
 
@@ -122,9 +121,10 @@ app.get('/amplify/login', (req, res) => {
 });
 
 // Handles OAuth Token Exchange
-async function handleAmplifyTokenExchange(authCode, redirectUri, psid) {
+async function handleAccountLinking(psid, event) {
+    console.log('HANDLING LINKING!!!!');
     let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
-        authCode,redirectUri);
+        event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
     console.log(tokenData);
 }
 
