@@ -22,19 +22,17 @@ const getToken = (baseUrl, authCode, redirectUri) => {
 const postRequest = (baseUrl, payload) => {
     return new Promise(function (resolve, reject) {
         console.log(baseUrl + 'oauth2/token');
-        console.log(payload);
         let auth = "Basic " + new Buffer(
             encodeURIComponent(process.env.HOOTSUITE_CLIENT_ID)
             + ":" + encodeURIComponent(process.env.HOOTSUITE_CLIENT_SECRET)
         ).toString("base64");
-        console.log(auth);
         request({
             uri: baseUrl + 'oauth2/token',
             method: 'POST',
             headers : {
                 "Authorization" : auth
             },
-            json: payload
+            form: payload
         }, (err, res, body) => {
             if (err) {
                 console.error('Unable to send OAuth message:' + err);
