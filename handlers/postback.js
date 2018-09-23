@@ -116,12 +116,13 @@ const handlePaidServices = (sender_psid) => {
         amplify_button,
     ];
 
+    if (logoutButton) {
+        buttons.push(logoutButton);
+    }
+
     cards.push(messages.card(text.GO_TO_AMPLIFY_TITLE, config.AMPLIFY_LOGO_URL,
         text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
 
-        if (logoutButton) {
-        cards.push(logoutButton);
-    }
     return messages.carousel(cards);
 };
 
