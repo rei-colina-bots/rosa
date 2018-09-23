@@ -19,6 +19,16 @@ const getToken = (baseUrl, authCode, redirectUri) => {
     });
 };
 
+/*
+ * Performs token refresh
+ */
+const refreshToken = (baseUrl, refreshToken) => {
+    return postRequest(baseUrl, {
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+    });
+};
+
 const postRequest = (baseUrl, payload) => {
     return new Promise(function (resolve, reject) {
         let auth = "Basic " + new Buffer(
@@ -43,5 +53,6 @@ const postRequest = (baseUrl, payload) => {
 };
 
 module.exports = {
-    getToken
+    getToken,
+    refreshToken
 }

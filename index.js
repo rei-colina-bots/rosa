@@ -138,6 +138,7 @@ async function handleAccountLinking(psid, event) {
             user.amplify.refreshToken = tokenData.refresh_token;
             users.set(psid, user);
             response = messages.text(text.ACCOUNT_LINKING_SUCCESS);
+            postback.handleAmplifyGet(psid);
         } else {
             response = messages.text(text.ACCOUNT_LINKING_FAILURE);
         }
