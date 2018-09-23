@@ -24,8 +24,9 @@ const postRequest = (baseUrl, payload) => {
         console.log(baseUrl + 'oauth2/token');
         console.log(payload);
         let auth = "Basic " + new Buffer(
-            process.env.HOOTSUITE_CLIENT_ID
-            + ":" + process.env.HOOTSUITE_CLIENT_SECRET).toString("base64");
+            encodeURIComponent(process.env.HOOTSUITE_CLIENT_ID)
+            + ":" + encodeURIComponent(process.env.HOOTSUITE_CLIENT_SECRET)
+        ).toString("base64");
         console.log(auth);
         request({
             uri: baseUrl + 'oauth2/token',
