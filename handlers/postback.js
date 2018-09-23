@@ -131,7 +131,7 @@ const handleAmplify = (sender_psid) => {
  */
 const handleAmplifyGet = async (sender_psid) => {
     let items = await articles.getAmplify(sender_psid);
-    console.log(articles);
+    console.log(items);
 };
 
 /*
