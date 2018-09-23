@@ -22,6 +22,7 @@ module.exports = {
     TYPING_ON: 'typing_on',
     TYPING_OFF: 'typing_off',
     MENU_SAVED_ITEMS: 'saved-items',
-    MENU_PAID_SERVICES: 'paid-services'
+    MENU_PAID_SERVICES: 'paid-services',
+    MENU_AMPLIFY: 'amplify'
 }
 

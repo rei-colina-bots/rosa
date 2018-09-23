@@ -36,6 +36,7 @@ module.exports = {
     MENU_WIRED: '🔌 Wired',
     MENU_COIN_TELEGRAPH: '🏦 Cointelegraph',
     MENU_SOCIAL: '📱 Social Networks',
+    MENU_AMPLIFY: '📣 Amplify',
     MENU_HELP: '❓ Help',
     WHAT_ELSE: 'Ok, what else?',
     SHOW_ME_NEWS: 'Show me some news!',

@@ -97,9 +97,9 @@ const handleSavedArticles = () => {
 };
 
 /*
- * Returns a response to the PAID_SERVICES event
+ * Returns a response to the AMPLIFY event
  */
-const handlePaidServices = (sender_psid) => {
+const handleAmplify = (sender_psid) => {
     let cards = [];
     let logoutButton;
     let hootsuite_auth_url = config.API_AMPLIFY_LOGIN_URL + '?psid=' + sender_psid;
@@ -188,5 +188,5 @@ module.exports = {
     handleSocialNetworks,
     handleShare,
     handleSavedArticles,
-    handlePaidServices
+    handleAmplify
 }
