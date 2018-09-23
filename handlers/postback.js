@@ -129,8 +129,9 @@ const handleAmplify = (sender_psid) => {
 /*
  * Returns a response to the AMPLIFY-GET event
  */
-const handleAmplifyGet = (sender_psid) => {
-    console.log(articles.getAmplify(sender_psid));
+const handleAmplifyGet = async (sender_psid) => {
+    let articles = await articles.getAmplify(sender_psid);
+    console.log(articles);
 };
 
 /*
