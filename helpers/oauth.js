@@ -37,7 +37,7 @@ const postRequest = (baseUrl, payload) => {
                 console.error('Unable to send OAuth message:' + err);
                 reject(err);
             }
-            resolve(body);
+            resolve(JSON.parse(body));
         }); 
     });
 };
