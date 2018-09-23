@@ -127,7 +127,7 @@ async function handleAccountLinking(psid, event) {
     let user = users.get(psid) || {amplify: {}};
     let response;
 
-    if (status === 'linked') {
+    if (event.status === 'linked') {
         // Perform the OAuth2 token exchange
         let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
             event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
