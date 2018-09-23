@@ -128,8 +128,9 @@ async function handleAccountLinking(psid, event) {
     // Perform the OAuth2 token exchange
     let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
         event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
-
+    console.log(tokenData);
     if (tokenData.access_token && tokenData.refresh_token) {
+        console.log('SAVING TOKENS');
         // Save the access token
         let user = users.get(psid) || {amplify: {}};
         user.amplify.accessToken = tokenData.access_token;
