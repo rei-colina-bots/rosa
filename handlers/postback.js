@@ -101,6 +101,7 @@ const handleSavedArticles = () => {
  */
 const handlePaidServices = (sender_psid) => {
     let cards = [];
+    let logoutButton;
     let hootsuite_auth_url = config.API_AMPLIFY_LOGIN_URL + '?psid=' + sender_psid;
 
     let amplify_button = messages.loginButton(hootsuite_auth_url);
@@ -108,6 +109,7 @@ const handlePaidServices = (sender_psid) => {
             users.get(sender_psid).amplify.accessToken) {
         amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON,
             "https://www.hootsuite.com");
+        logoutButton = messages.logoutButton();
     }
 
     let buttons = [
@@ -116,6 +118,10 @@ const handlePaidServices = (sender_psid) => {
 
     cards.push(messages.card(text.GO_TO_AMPLIFY_TITLE, config.AMPLIFY_LOGO_URL,
         text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
+
+        if (logoutButton) {
+        cards.push(logoutButton);
+    }
     return messages.carousel(cards);
 };
 

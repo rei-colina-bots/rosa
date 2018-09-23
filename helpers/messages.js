@@ -30,12 +30,21 @@ const webURLButton = (title, url) => {
 };
 
 /*
- * Button that links to a web URL
+ * Button for account linking
  */
 const loginButton = (url) => {
     return {
         type: 'account_link',
         url: url
+    };
+};
+
+/*
+ * Button to disconnect a linked account
+ */
+const logoutButton = () => {
+    return {
+        type: 'account_unlink'
     };
 };
 
@@ -130,6 +139,7 @@ module.exports = {
     quickReply,
     quickReplies,
     buttonCard,
-    loginButton
+    loginButton,
+    logoutButton
 }
 

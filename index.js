@@ -124,19 +124,31 @@ app.get('/amplify/login', (req, res) => {
 // Handles OAuth Token Exchange
 async function handleAccountLinking(psid, event) {
     let users = new dataStore('users');
+    let user = users.get(psid) || {amplify: {}};
+    let response;
 
-    // Perform the OAuth2 token exchange
-    let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
-        event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
-    console.log(tokenData);
-    if (tokenData.access_token && tokenData.refresh_token) {
-        console.log('SAVING TOKENS');
-        // Save the access token
-        let user = users.get(psid) || {amplify: {}};
-        user.amplify.accessToken = tokenData.access_token;
-        user.amplify.refreshToken = tokenData.refresh_token;
+    if (status === 'linked') {
+        // Perform the OAuth2 token exchange
+        let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
+            event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
+
+        if (tokenData.access_token && tokenData.refresh_token) {
+            // Save the access token
+            user.amplify.accessToken = tokenData.access_token;
+            user.amplify.refreshToken = tokenData.refresh_token;
+            users.set(psid, user);
+            response = messages.text(text.ACCOUNT_LINKING_SUCCESS);
+        } else {
+            response = messages.text(text.ACCOUNT_LINKING_FAILURE);
+        }
+    } else {
+        // Account is being unlinked. Remove token information
+        user.amplify = {};
         users.set(psid, user);
+        response = messages.text(text.ACCOUNT_LINKING_LOGOUT_SUCCESS);
     }
+
+    api.sendMessage(psid, response);
 }
 
 // Handles messages events

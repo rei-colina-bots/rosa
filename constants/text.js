@@ -14,7 +14,7 @@ module.exports = {
     GO_TO_POCKET_TITLE: "Log into Pocket to see your saved articles",
     GO_TO_POCKET_BUTTON: "Go!",
     GO_TO_AMPLIFY_TITLE: "Hootsuite Amplify",
-    GO_TO_AMPLIFY_SUBTITLE: "Log into Amplify to see your work's or organization's articles",
+    GO_TO_AMPLIFY_SUBTITLE: "See your work's or organization's articles",
     GO_TO_AMPLIFY_BUTTON: "See Amplify Articles",
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
@@ -26,7 +26,7 @@ module.exports = {
     SAVE_FOR_LATER: 'Save for later',
     MENU: '💬 Menu',
     MENU_SAVED_ITEMS: '🗄 Saved Articles',
-    MENU_PAID_SERVICES: '💵 Paid Services',
+    MENU_PAID_SERVICES: '🕴 Corporate Services',
     MENU_TOPICS: '🗞 News Feeds',
     MENU_TECH: '👨🏻‍💻 Hacker News',
     MENU_BBC: '🌎 BBC',
@@ -46,6 +46,9 @@ module.exports = {
     GOOGLEPLUS: 'Google+',
     INSTAGRAM: 'Instagram',
     SIGN_IN: 'Sign In & View',
+    ACCOUNT_LINKING_SUCCESS: 'You have successfully logged in! ✅',
+    ACCOUNT_LINKING_LOGOUT_SUCCESS: 'You have successfully logged out! 👍🏼',
+    ACCOUNT_LINKING_FAILURE: 'Failed to log into your service 😔',
     COMING_SOON: 'Stay tuned, still working on it 🚧 but this will be available very soon! 🤞🏼'
 }
 
