@@ -131,9 +131,9 @@ async function handleAccountLinking(psid, event) {
     
     if (tokenData.access_token & tokenData.refresh_token) {
         // Save the access token
-        let user = users.get(psid) || {};
-        user.amplifyToken = tokenData.access_token;
-        user.refreshToken = tokenData.refresh_token;
+        let user = users.get(psid) || {amplify: {}};
+        user.amplify.accessToken = tokenData.access_token;
+        user.amplify.refreshToken = tokenData.refresh_token;
         users.set(psid, user);
     }
 }

@@ -104,8 +104,10 @@ const handlePaidServices = (sender_psid) => {
     let hootsuite_auth_url = config.API_AMPLIFY_LOGIN_URL + '?psid=' + sender_psid;
 
     let amplify_button = messages.loginButton(hootsuite_auth_url);
-    if (users.get(sender_psid) && users.get(sender_psid).amplifyToken) {
-        amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON, "https://www.hootsuite.com");
+    if (users.get(sender_psid) && users.get(sender_psid).amplify &&
+            users.get(sender_psid).amplify.accessToken) {
+        amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON,
+            "https://www.hootsuite.com");
     }
 
     let buttons = [

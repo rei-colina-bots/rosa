@@ -21,7 +21,6 @@ const getToken = (baseUrl, authCode, redirectUri) => {
 
 const postRequest = (baseUrl, payload) => {
     return new Promise(function (resolve, reject) {
-        console.log(baseUrl + 'oauth2/token');
         let auth = "Basic " + new Buffer(
             encodeURIComponent(process.env.HOOTSUITE_CLIENT_ID)
             + ":" + encodeURIComponent(process.env.HOOTSUITE_CLIENT_SECRET)
