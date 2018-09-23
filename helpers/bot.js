@@ -48,8 +48,6 @@ const setup = (res) => {
                         events.MENU_SOCIAL),
                     messages.postbackButton(text.MENU_SAVED_ITEMS,
                         events.MENU_SAVED_ITEMS),
-                    messages.postbackButton(text.MENU_HELP,
-                        events.GET_STARTED),
                     {
                         title: text.MENU_PAID_SERVICES,
                         type: 'nested',
@@ -57,7 +55,9 @@ const setup = (res) => {
                             messages.postbackButton(text.MENU_AMPLIFY,
                                 events.MENU_AMPLIFY)
                         ]
-                    }
+                    },
+                    messages.postbackButton(text.MENU_HELP,
+                        events.GET_STARTED)
                   ]
                 }
               ]
