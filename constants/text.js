@@ -15,7 +15,7 @@ module.exports = {
     GO_TO_POCKET_BUTTON: "Go!",
     GO_TO_AMPLIFY_TITLE: "Hootsuite Amplify",
     GO_TO_AMPLIFY_SUBTITLE: "Log into Amplify to see your work's or organization's articles",
-    GO_TO_AMPLIFY_BUTTON: "Go!",
+    GO_TO_AMPLIFY_BUTTON: "See Amplify Articles",
     SHARE_ON_FB: 'Share on Facebook',
     SHARE_ON_TW: 'Share on Twitter',
     SHARE_ON_LI: 'Share on LinkedIn',

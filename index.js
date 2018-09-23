@@ -13,6 +13,7 @@ const
   events = require("./constants/events.js"),
   config = require("./constants/config.js"),
   postback = require("./handlers/postback.js"),
+  dataStore = require("./data/storage.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
@@ -122,10 +123,19 @@ app.get('/amplify/login', (req, res) => {
 
 // Handles OAuth Token Exchange
 async function handleAccountLinking(psid, event) {
-    console.log('HANDLING LINKING!!!!');
+    let users = new dataStore('users');
+
+    // Perform the OAuth2 token exchange
     let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
         event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
-    console.log(tokenData);
+    
+    if (tokenData.access_token & tokenData.refresh_token) {
+        // Save the access token
+        let user = users.get(psid) || {};
+        user.amplifyToken = tokenData.access_token;
+        user.refreshToken = tokenData.refresh_token;
+        users.set(psid, user);
+    }
 }
 
 // Handles messages events
