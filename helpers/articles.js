@@ -86,8 +86,15 @@ const getAmplify = async (psid) => {
     if (items.length > 0) {
         while (articles.length < config.MAX_ARTICLES) {
             if (items[i].text && items[i].url
-                && items[i].isShareable && !items[i].isDeleted
-                && items[i].photoUrl) {
+                && items[i].isShareable
+                && !items[i].isDeleted
+                && items[i].photoUrl
+                && !items[i].isReshareable
+                && !items[i].topics.includes('italian')
+                && !items[i].topics.includes('latam')
+                && !items[i].topics.includes('deutsch')
+                && !items[i].topics.includes('francais')
+                && !items[i].topics.includes('español')) {
                 articles.push({
                     title: items[i].text,
                     url: items[i].url,
