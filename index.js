@@ -139,7 +139,7 @@ async function handleAccountLinking(psid, event) {
             users.set(psid, user);
             response = messages.text(text.ACCOUNT_LINKING_SUCCESS);
             api.sendMessage(psid, response);
-            response = postback.handleFeed(events.TOPIC_AMPLIFY, psid);
+            response = await postback.handleFeed(events.TOPIC_AMPLIFY, psid);
             api.sendMessage(psid, response);
         } else {
             response = messages.text(text.ACCOUNT_LINKING_FAILURE);
