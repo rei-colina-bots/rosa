@@ -14,6 +14,7 @@ module.exports = {
     TOPIC_HBR: 'topic-hbr',
     TOPIC_ENT_LEAD: 'topic-inc-lead',
     TOPIC_WIRED: 'topic-wired',
+    TOPIC_AMPLIFY: 'topic-amplify',
     MENU_SOCIAL: 'social-networks',
     GET_STARTED: 'get-started',
     GET_STARTED_2: 'get-started-2',
@@ -21,6 +22,8 @@ module.exports = {
     MARK_SEEN: 'mark_seen',
     TYPING_ON: 'typing_on',
     TYPING_OFF: 'typing_off',
-    MENU_SAVED_ITEMS: 'saved-items'
+    MENU_SAVED_ITEMS: 'saved-items',
+    MENU_PAID_SERVICES: 'paid-services',
+    MENU_AMPLIFY: 'amplify'
 }
 

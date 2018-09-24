@@ -7,9 +7,13 @@ const
   messages = require("./helpers/messages.js"),
   api = require('./helpers/api.js'),
   bot = require("./helpers/bot.js"),
+  oauth = require("./helpers/oauth.js"),
+  utils = require("./helpers/utils.js"),
   text = require("./constants/text.js"),
   events = require("./constants/events.js"),
+  config = require("./constants/config.js"),
   postback = require("./handlers/postback.js"),
+  dataStore = require("./data/storage.js"),
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
@@ -43,6 +47,8 @@ app.post('/webhook', (req, res) => {
             handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
+        } else if (webhook_event.account_linking) {
+            handleAccountLinking(sender_psid, webhook_event.account_linking);
         }
       });
   
@@ -91,6 +97,63 @@ app.get('/webhook', (req, res) => {
 app.get('/setup', (req, res) => {
     bot.setup(res);
 });
+
+// Callback URL for Oauth2
+app.get('/oauth2/callback', (req, res) => {
+    let state = JSON.parse(req.query['state']);
+    let authorizationCode = req.query['code'];
+    let redirectUri = state.redirectUri + '&authorization_code=' + authorizationCode;
+
+    res.redirect(redirectUri);
+});
+
+// Endpoint to log into Hootsuite Amplify
+app.get('/amplify/login', (req, res) => {
+    let state = {
+        psid: req.query['psid'],
+        redirectUri: req.query['redirect_uri']
+    }
+
+    let hootsuite_auth_url = utils.getAuthLink(config.API_HOOTSUITE_BASE_URL,
+        process.env.HOOTSUITE_CLIENT_ID, config.API_AMPLIFY_AUTH_REDIRECT_URL,
+        'offline',  encodeURI(JSON.stringify(state)));
+
+    res.redirect(hootsuite_auth_url);
+});
+
+// Handles OAuth Token Exchange
+async function handleAccountLinking(psid, event) {
+    let users = new dataStore('users');
+    let user = users.get(psid) || {amplify: {}};
+    let response;
+
+    if (event.status === 'linked') {
+        // Perform the OAuth2 token exchange
+        let tokenData = await oauth.getToken(config.API_HOOTSUITE_BASE_URL,
+            event.authorization_code , config.API_AMPLIFY_AUTH_REDIRECT_URL);
+
+        if (tokenData.access_token && tokenData.refresh_token) {
+            // Save the access token
+            user.amplify.accessToken = tokenData.access_token;
+            user.amplify.refreshToken = tokenData.refresh_token;
+            users.set(psid, user);
+            response = messages.text(text.ACCOUNT_LINKING_SUCCESS);
+            api.sendMessage(psid, response);
+            response = await postback.handleFeed(events.TOPIC_AMPLIFY, psid);
+            api.sendMessage(psid, response);
+        } else {
+            response = messages.text(text.ACCOUNT_LINKING_FAILURE);
+            api.sendMessage(psid, response);
+        }
+    } else {
+        // Account is being unlinked. Remove token information
+        user.amplify = {};
+        users.set(psid, user);
+        response = messages.text(text.ACCOUNT_LINKING_LOGOUT_SUCCESS);
+        api.sendMessage(psid, response);
+    }
+
+}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -142,6 +205,10 @@ async function  handlePostback(sender_psid, received_postback) {
         response = await postback.handleFeed(events.TOPIC_ENT_LEAD);
     } else if (payload === events.MENU_SAVED_ITEMS) {
         response = postback.handleSavedArticles();
+    } else if (payload === events.MENU_AMPLIFY) {
+        response = postback.handleAmplify(sender_psid);
+    } else if (payload === events.TOPIC_AMPLIFY) {
+        response = await postback.handleFeed(events.TOPIC_AMPLIFY, sender_psid);
     } else if (title ===  text.SHARE) {
         response = postback.handleShare(JSON.parse(payload));
     } else {

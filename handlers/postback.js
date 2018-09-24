@@ -12,6 +12,9 @@ const config = require("../constants/config.js");
 const events = require("../constants/events.js");
 const utils = require("../helpers/utils.js");
 const articles = require("../helpers/articles.js");
+const dataStore = require("../data/storage.js");
+
+let users = new dataStore('users');
 
 /*
  * Returns a response to the GET_STARTED event
@@ -45,7 +48,7 @@ const handleGetStarted3 = () => {
 /*
  * Returns a response to the TOPIC_TECH event
  */
-const handleFeed = async (feedType) => {
+const handleFeed = async (feedType, sender_psid) => {
     let feed = [];
     let cards = [];
     let buttons = [];
@@ -66,6 +69,8 @@ const handleFeed = async (feedType) => {
     } else if (feedType === events.TOPIC_COIN_TELEGRAPH) {
         feed = await articles.getFromRssFeed(config.RSS_COIN_TELEGRAPH);
         image = config.COIN_TELEGRAPH_LOGO_URL;
+    } else if (feedType === events.TOPIC_AMPLIFY) {
+        feed = await articles.getAmplify(sender_psid);
     }
 
     feed.forEach((article) => {
@@ -75,7 +80,7 @@ const handleFeed = async (feedType) => {
                 utils.getSaveLink(article.url)),
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, image, '', '', buttons));
+        cards.push(messages.card(article.title, image || article.image, '', '', buttons));
     });
     return messages.carousel(cards);
 };
@@ -90,6 +95,36 @@ const handleSavedArticles = () => {
     ];
     cards.push(messages.card(text.GO_TO_POCKET_TITLE, config.POCKET_LOGO_URL,
         '', '', buttons));
+    return messages.carousel(cards);
+};
+
+/*
+ * Returns a response to the AMPLIFY event
+ */
+const handleAmplify = (sender_psid) => {
+    let cards = [];
+    let logoutButton;
+    let hootsuite_auth_url = config.API_AMPLIFY_LOGIN_URL + '?psid=' + sender_psid;
+
+    let amplify_button = messages.loginButton(hootsuite_auth_url);
+    if (users.get(sender_psid) && users.get(sender_psid).amplify &&
+            users.get(sender_psid).amplify.accessToken) {
+        amplify_button = messages.postbackButton(text.GO_TO_AMPLIFY_BUTTON,
+            events.TOPIC_AMPLIFY);
+        logoutButton = messages.logoutButton();
+    }
+
+    let buttons = [
+        amplify_button,
+    ];
+
+    if (logoutButton) {
+        buttons.push(logoutButton);
+    }
+
+    cards.push(messages.card(text.GO_TO_AMPLIFY_TITLE, config.AMPLIFY_LOGO_URL,
+        text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
+
     return messages.carousel(cards);
 };
 
@@ -154,5 +189,6 @@ module.exports = {
     handleFeed,
     handleSocialNetworks,
     handleShare,
-    handleSavedArticles
+    handleSavedArticles,
+    handleAmplify
 }

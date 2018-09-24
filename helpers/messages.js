@@ -30,6 +30,25 @@ const webURLButton = (title, url) => {
 };
 
 /*
+ * Button for account linking
+ */
+const loginButton = (url) => {
+    return {
+        type: 'account_link',
+        url: url
+    };
+};
+
+/*
+ * Button to disconnect a linked account
+ */
+const logoutButton = () => {
+    return {
+        type: 'account_unlink'
+    };
+};
+
+/*
  * Message that represents a card
  */
 const card = (title, image_url, subtitle, url, buttons) => {
@@ -119,6 +138,8 @@ module.exports = {
     text,
     quickReply,
     quickReplies,
-    buttonCard
+    buttonCard,
+    loginButton,
+    logoutButton
 }
 

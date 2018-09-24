@@ -34,8 +34,18 @@ const getSaveLink = (url) => {
     return config.POCKET_SAVE_URL + url;
 };
 
+/*
+ * Generates a oauth authentication link
+ */
+const getAuthLink = (baseUrl, clientId, redirectUrl,
+    scope, state) => {
+        return baseUrl + 'oauth2/auth?response_type=code&client_id=' + clientId
+            + '&redirect_uri=' + redirectUrl + '&scope=' + scope + '&state=' + state;
+};
+
 module.exports = {
     getShareLink,
-    getSaveLink
+    getSaveLink,
+    getAuthLink
 }
 
