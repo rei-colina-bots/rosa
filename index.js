@@ -138,18 +138,21 @@ async function handleAccountLinking(psid, event) {
             user.amplify.refreshToken = tokenData.refresh_token;
             users.set(psid, user);
             response = messages.text(text.ACCOUNT_LINKING_SUCCESS);
-            postback.handleAmplifyGet(psid);
+            api.sendMessage(psid, response);
+            response = postback.handleFeed(events.TOPIC_AMPLIFY, psid);
+            api.sendMessage(psid, response);
         } else {
             response = messages.text(text.ACCOUNT_LINKING_FAILURE);
+            api.sendMessage(psid, response);
         }
     } else {
         // Account is being unlinked. Remove token information
         user.amplify = {};
         users.set(psid, user);
         response = messages.text(text.ACCOUNT_LINKING_LOGOUT_SUCCESS);
+        api.sendMessage(psid, response);
     }
 
-    api.sendMessage(psid, response);
 }
 
 // Handles messages events

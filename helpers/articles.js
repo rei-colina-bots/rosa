@@ -90,7 +90,8 @@ const getAmplify = async (psid) => {
                 && items[i].photoUrl) {
                 articles.push({
                     title: items[i].text,
-                    url: items[i].url
+                    url: items[i].url,
+                    image: items[i].photoUrl
                 });
             }
             i = i + 1;

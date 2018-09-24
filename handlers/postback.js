@@ -48,7 +48,7 @@ const handleGetStarted3 = () => {
 /*
  * Returns a response to the TOPIC_TECH event
  */
-const handleFeed = async (feedType) => {
+const handleFeed = async (feedType, sender_psid) => {
     let feed = [];
     let cards = [];
     let buttons = [];
@@ -69,6 +69,8 @@ const handleFeed = async (feedType) => {
     } else if (feedType === events.TOPIC_COIN_TELEGRAPH) {
         feed = await articles.getFromRssFeed(config.RSS_COIN_TELEGRAPH);
         image = config.COIN_TELEGRAPH_LOGO_URL;
+    } else if (feedType === events.TOPIC_AMPLIFY) {
+        feed = await articles.getAmplify(sender_psid);
     }
 
     feed.forEach((article) => {
@@ -78,7 +80,7 @@ const handleFeed = async (feedType) => {
                 utils.getSaveLink(article.url)),
             messages.postbackButton(text.SHARE, JSON.stringify(article))
         ];
-        cards.push(messages.card(article.title, image, '', '', buttons));
+        cards.push(messages.card(article.title, image || article.image, '', '', buttons));
     });
     return messages.carousel(cards);
 };
@@ -124,14 +126,6 @@ const handleAmplify = (sender_psid) => {
         text.GO_TO_AMPLIFY_SUBTITLE, '', buttons));
 
     return messages.carousel(cards);
-};
-
-/*
- * Returns a response to the AMPLIFY-GET event
- */
-const handleAmplifyGet = async (sender_psid) => {
-    let items = await articles.getAmplify(sender_psid);
-    console.log(items);
 };
 
 /*
