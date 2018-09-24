@@ -190,6 +190,5 @@ module.exports = {
     handleSocialNetworks,
     handleShare,
     handleSavedArticles,
-    handleAmplify,
-    handleAmplifyGet
+    handleAmplify
 }
