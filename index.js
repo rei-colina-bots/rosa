@@ -207,6 +207,8 @@ async function  handlePostback(sender_psid, received_postback) {
         response = postback.handleSavedArticles();
     } else if (payload === events.MENU_AMPLIFY) {
         response = postback.handleAmplify(sender_psid);
+    } else if (payload === events.TOPIC_AMPLIFY) {
+        response = await postback.handleFeed(events.TOPIC_AMPLIFY, sender_psid);
     } else if (title ===  text.SHARE) {
         response = postback.handleShare(JSON.parse(payload));
     } else {

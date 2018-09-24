@@ -109,8 +109,8 @@ const handleAmplify = (sender_psid) => {
     let amplify_button = messages.loginButton(hootsuite_auth_url);
     if (users.get(sender_psid) && users.get(sender_psid).amplify &&
             users.get(sender_psid).amplify.accessToken) {
-        amplify_button = messages.webURLButton(text.GO_TO_AMPLIFY_BUTTON,
-            "https://www.hootsuite.com");
+        amplify_button = messages.postbackButton(text.GO_TO_AMPLIFY_BUTTON,
+            events.TOPIC_AMPLIFY);
         logoutButton = messages.logoutButton();
     }
 
