@@ -90,11 +90,11 @@ const getAmplify = async (psid) => {
                 && !items[i].isDeleted
                 && items[i].photoUrl
                 && !items[i].isReshareable
-                && !items[i].topics.includes('italian')
-                && !items[i].topics.includes('latam')
-                && !items[i].topics.includes('deutsch')
-                && !items[i].topics.includes('francais')
-                && !items[i].topics.includes('español')) {
+                && !items[i].topics.includes('Italian')
+                && !items[i].topics.includes('LATAM')
+                && !items[i].topics.includes('Deutsch')
+                && !items[i].topics.includes('Francais')
+                && !items[i].topics.includes('Español')) {
                 articles.push({
                     title: items[i].text,
                     url: items[i].url,
