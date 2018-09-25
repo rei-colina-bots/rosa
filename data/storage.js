@@ -51,9 +51,10 @@ module.exports = class Storage {
                 getSearchQuery(config.COLLECTION_USERS, key), 
                 function(err, doc) {
                 if (err) {
-                  console.log('Failed retrieve from DB. ' + err);
+                    console.log('Failed retrieve from DB. ' + err);
                 } else {
-                  return doc;
+                    console.log(doc);
+                    return doc;
                 }
               });
         } else {
