@@ -64,7 +64,7 @@ module.exports = class Storage {
     set(key, value) {
         if (this.type === config.STORAGE_TYPE_MONGO) {
             db.collection(this.name).updateOne(
-                getSearchQuery(config.COLLECTION_USERS, key), value,
+                getSearchQuery(config.COLLECTION_USERS, key), { $set: value},
                 {upsert: true},
                 function(err, doc) {
                 if (err) {
