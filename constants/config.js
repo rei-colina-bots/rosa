@@ -44,6 +44,8 @@ module.exports = {
     API_AMPLIFY_BASE_URL: 'https://platform.hootsuite.com/amplify/',
     API_HOOTSUITE_BASE_URL: 'https://platform.hootsuite.com/',
     API_AMPLIFY_AUTH_REDIRECT_URL: 'https://rosa-bot.herokuapp.com/oauth2/callback',
-    API_AMPLIFY_LOGIN_URL: 'https://rosa-bot.herokuapp.com/amplify/login'
+    API_AMPLIFY_LOGIN_URL: 'https://rosa-bot.herokuapp.com/amplify/login',
+    STORAGE_TYPE_MONGO: 'mongo',
+    COLLECTION_USERS: 'users'
 }
 
