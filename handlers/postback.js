@@ -14,7 +14,8 @@ const utils = require("../helpers/utils.js");
 const articles = require("../helpers/articles.js");
 const dataStore = require("../data/storage.js");
 
-let users = new dataStore('users');
+let users = new dataStore(config.COLLECTION_USERS,
+    config.STORAGE_TYPE_MONGO);
 
 /*
  * Returns a response to the GET_STARTED event
