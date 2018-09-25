@@ -47,7 +47,6 @@ module.exports = class Storage {
 
     get(key) {
         if (this.type === config.STORAGE_TYPE_MONGO) {
-            let attribute = idMap[this.name];
             db.collection(this.name).findOne(
                 getSearchQuery(config.COLLECTION_USERS, key), 
                 function(err, doc) {
