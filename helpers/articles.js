@@ -63,11 +63,12 @@ const getFromRssFeed = async (rssUrl) => {
  * Retrieves articles from Hootsuite Amplify API
  */
 const getAmplify = async (psid) => {
-    let users = new dataStore('users');
+    let users = new dataStore(config.COLLECTION_USERS,
+        config.STORAGE_TYPE_MONGO);
     let articles = [];
 
     // Retrieve user's data
-    let user = users.get(psid);
+    let user = await users.get(psid);
 
     // Get a new API token data
     let tokenData = await oauth.refreshToken(

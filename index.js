@@ -123,8 +123,9 @@ app.get('/amplify/login', (req, res) => {
 
 // Handles OAuth Token Exchange
 async function handleAccountLinking(psid, event) {
-    let users = new dataStore('users');
-    let user = users.get(psid) || {amplify: {}};
+    let users = new dataStore(config.COLLECTION_USERS,
+        config.STORAGE_TYPE_MONGO);
+    let user = await users.get(psid) || {amplify: {}};
     let response;
 
     if (event.status === 'linked') {
@@ -206,7 +207,7 @@ async function  handlePostback(sender_psid, received_postback) {
     } else if (payload === events.MENU_SAVED_ITEMS) {
         response = postback.handleSavedArticles();
     } else if (payload === events.MENU_AMPLIFY) {
-        response = postback.handleAmplify(sender_psid);
+        response = await postback.handleAmplify(sender_psid);
     } else if (payload === events.TOPIC_AMPLIFY) {
         response = await postback.handleFeed(events.TOPIC_AMPLIFY, sender_psid);
     } else if (title ===  text.SHARE) {
