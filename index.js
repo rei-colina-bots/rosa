@@ -125,7 +125,7 @@ app.get('/amplify/login', (req, res) => {
 async function handleAccountLinking(psid, event) {
     let users = new dataStore(config.COLLECTION_USERS,
         config.STORAGE_TYPE_MONGO);
-    let user = users.get(psid) || {amplify: {}};
+    let user = await users.get(psid) || {amplify: {}};
     let response;
 
     if (event.status === 'linked') {

@@ -102,14 +102,14 @@ const handleSavedArticles = () => {
 /*
  * Returns a response to the AMPLIFY event
  */
-const handleAmplify = (sender_psid) => {
+const handleAmplify = async (sender_psid) => {
     let cards = [];
     let logoutButton;
     let hootsuite_auth_url = config.API_AMPLIFY_LOGIN_URL + '?psid=' + sender_psid;
 
     let amplify_button = messages.loginButton(hootsuite_auth_url);
-    if (users.get(sender_psid) && users.get(sender_psid).amplify &&
-            users.get(sender_psid).amplify.accessToken) {
+    let user = await users.get(sender_psid);
+    if (user && user.amplify && user.amplify.accessToken) {
         amplify_button = messages.postbackButton(text.GO_TO_AMPLIFY_BUTTON,
             events.TOPIC_AMPLIFY);
         logoutButton = messages.logoutButton();

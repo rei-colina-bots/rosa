@@ -46,20 +46,22 @@ module.exports = class Storage {
     }
 
     get(key) {
-        if (this.type === config.STORAGE_TYPE_MONGO) {
-            db.collection(this.name).findOne(
-                getSearchQuery(config.COLLECTION_USERS, key), 
-                function(err, doc) {
-                if (err) {
-                    console.log('Failed retrieve from DB. ' + err);
-                } else {
-                    console.log(doc);
-                    return doc;
-                }
-              });
-        } else {
-            return memoryStorage[this.name][key];
-        }
+        return new Promise(function (resolve, reject) {
+            if (this.type === config.STORAGE_TYPE_MONGO) {
+                db.collection(this.name).findOne(
+                    getSearchQuery(config.COLLECTION_USERS, key), 
+                    function(err, doc) {
+                    if (err) {
+                        console.log('Failed retrieve from DB. ' + err);
+                        reject({});
+                    } else {
+                        resolve(doc);
+                    }
+                  });
+            } else {
+                resolve(memoryStorage[this.name][key]);
+            }
+        });
     }
 
     set(key, value) {
