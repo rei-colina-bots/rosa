@@ -49,6 +49,7 @@ module.exports = class Storage {
         let name = this.name;
         if (this.type === config.STORAGE_TYPE_MONGO) {
             return new Promise(function (resolve, reject) {
+                console.log('GETTING ' + key + ' FROM ' + name);
                 db.collection(name).findOne(
                     getSearchQuery(config.COLLECTION_USERS, key), 
                     function(err, doc) {

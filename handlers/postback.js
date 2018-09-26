@@ -109,6 +109,7 @@ const handleAmplify = async (sender_psid) => {
 
     let amplify_button = messages.loginButton(hootsuite_auth_url);
     let user = await users.get(sender_psid);
+    console.log("USER IS: " + user);
     if (user && user.amplify && user.amplify.accessToken) {
         amplify_button = messages.postbackButton(text.GO_TO_AMPLIFY_BUTTON,
             events.TOPIC_AMPLIFY);
