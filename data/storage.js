@@ -46,9 +46,10 @@ module.exports = class Storage {
     }
 
     get(key) {
+        let name = this.name;
         if (this.type === config.STORAGE_TYPE_MONGO) {
             return new Promise(function (resolve, reject) {
-                db.collection(this.name).findOne(
+                db.collection(name).findOne(
                     getSearchQuery(config.COLLECTION_USERS, key), 
                     function(err, doc) {
                     if (err) {
@@ -61,7 +62,7 @@ module.exports = class Storage {
             });
         } else {
             return new Promise(function (resolve, reject) {
-                resolve(memoryStorage[this.name][key]);
+                resolve(memoryStorage[name][key]);
             });
         }
     }
