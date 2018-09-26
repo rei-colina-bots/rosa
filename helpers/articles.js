@@ -69,6 +69,8 @@ const getAmplify = async (psid) => {
 
     // Retrieve user's data
     let user = users.get(psid);
+    console.log(user);
+    console.log(user.amplify);
 
     // Get a new API token data
     let tokenData = await oauth.refreshToken(
