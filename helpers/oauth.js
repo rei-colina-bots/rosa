@@ -35,6 +35,9 @@ const postRequest = (baseUrl, payload) => {
             encodeURIComponent(process.env.HOOTSUITE_CLIENT_ID)
             + ":" + encodeURIComponent(process.env.HOOTSUITE_CLIENT_SECRET)
         ).toString("base64");
+        console.log(baseUrl);
+        console.log("PAYLOAD!!!!");
+        console.log(payload);
         request({
             uri: baseUrl + 'oauth2/token',
             method: 'POST',
